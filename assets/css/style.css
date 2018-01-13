@@ -1,7 +1,33 @@
-.header {
-  background-color: #000000;
+body {
+  background-image: url("../images/background.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-h1, p {
-  color: #FFA500;
+.jumbotron {
+  background-color: #8B4513;
+  margin: auto;
+  width: 90%;
+}
+
+.form-group {
+  margin: auto;
+  width: 90%;
+  padding-top: 10px;
+}
+
+h1 {
+  color: #FFFF00;
+  font-family: Food, Helvetica, Arial, sans-serif;
+  font-size: 120px;
+}
+
+.lead {
+  color: #FFFF00;
+  font-size: 28px;
+}
+@font-face {
+  font-family: Food;
+  src: url("../images/food.ttf");
 }
