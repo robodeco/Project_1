@@ -2,19 +2,21 @@
 
 //<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 // <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
-//--> add this to html footer
+//--> add these to html footer
 
 
 
   // Initialize Firebase
-var config = {
-  apiKey: "AIzaSyAVnlzqusPgquz8120f7hliP88cxUc5Ee0",
-  authDomain: "foodcodingstarsfeedbag.firebaseapp.com",
-  databaseURL: "https://foodcodingstarsfeedbag.firebaseio.com",
-  projectId: "foodcodingstarsfeedbag",
-  storageBucket: "foodcodingstarsfeedbag.appspot.com",
-  messagingSenderId: "930228768539"
-};
+
+   var config = {
+     apiKey: "AIzaSyCCePhrTpJl2GV9MRff0_-3GTUs4zYB6WQ",
+     authDomain: "foodcodingstarsfeed.firebaseapp.com",
+     databaseURL: "https://foodcodingstarsfeed.firebaseio.com",
+     projectId: "foodcodingstarsfeed",
+     storageBucket: "",
+     messagingSenderId: "342995053882"
+   };
+
 
 firebase.initializeApp(config);
 var database = firebase.database();
@@ -37,7 +39,11 @@ $("#placeholdernameandlocationsubmitbutton").on("click", function(){
 });
 
 database.ref().on("value", function(snapshot) {
-  var ref = snapshot.toJSON();;
+  var ref = snapshot.val();
+  var userarray =[];
+  userarray.push(ref);
   console.log(ref);
+  console.log(userarray.length);
+
 
 });
