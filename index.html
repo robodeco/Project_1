@@ -11,58 +11,67 @@
 
   <body>
 
-    <div class="jumbotron header">
-      <div class="container">
-        <h1>FeedBag</h1>
-        <p class="lead">Restaurants or Couch. Feed your cravings!</p>
-      </div>
-    </div>
 
-                      <!-- Question 1 !-->
-    <div class="form-group">
-      <h5 class="card">Question 1</h5>
-		    <label class="control-label">What time of day is it?</label>
-		    <div class="radio">
-          <button type="button" class="btn btn-primary">Breakfast</button>
-          <button type="button" class="btn btn-secondary">Lunch</button>
-          <button type="button" class="btn btn-success">Dinner</button>
-		    </div>
-                    <!-- Question 2 !-->
-      <h5 class="card">Question 2</h5>
-        <label class="control-label">What type of eater are you?</label>
-        <div class="radio">
-          <button type="button" class="btn btn-primary">Carnivore</button>
-          <button type="button" class="btn btn-secondary">Herbivore</button>
-          <button type="button" class="btn btn-success">Omnivore</button>
+      <div class="header">
+        <h1>FeedBag</h1>
+        
+        <p class="lead">Discover Your Cravings!</p>
+      </div>
+
+
+                      <!-- Questionnaire !-->
+
+<div class="card">
+<!--  <h5 class="card-header">Questionnaire</h5> !-->
+  <div class="card-body">
+
+      <div class="form-group">
+         <label for="exampleSelect1">What time of day is it?</label>
+         <select class="form-control" id="time-input">
+           <option id="breakfast">Breakfast</option>
+           <option id="lunch">Lunch</option>
+           <option id="dinner">Dinner</option>
+         </select>
+       </div>
+       <div class="form-group">
+          <label for="exampleSelect1">What type of eater are you?</label>
+          <select class="form-control" id="type-input">
+            <option id="carnivore">Carnivore</option>
+            <option id="herbivore">Herbivore</option>
+            <option id="omnivore">Omnivore</option>
+          </select>
         </div>
-                      <!-- Question 3 !-->
-      <h5 class="card">Question 3</h5>
-        <label class="control-label">What food culture are you in the mood for?</label>
-        <div class="radio">
-          <button type="button" class="btn btn-primary">American</button>
-          <button type="button" class="btn btn-secondary">Italian</button>
-          <button type="button" class="btn btn-success">Mexican</button>
-          <button type="button" class="btn btn-danger">Chinese</button>
-          <button type="button" class="btn btn-warning">Thai</button>
-        </div>
-                      <!-- Question 4 !-->
-      <h5 class="card">Question 4</h5>
-        <label class="control-label">What's your taste buds craving?</label>
-        <div class="radio">
-          <button type="button" class="btn btn-primary">Sweet</button>
-          <button type="button" class="btn btn-secondary">Sour</button>
-          <button type="button" class="btn btn-success">Bitter</button>
-          <button type="button" class="btn btn-danger">Salty</button>
-          <button type="button" class="btn btn-warning">Savory</button>
-        </div>
-                      <!-- Question 5 !-->
-      <h5 class="card">Question 5</h5>
-        <label class="control-label">What's your price range?</label>
-        <div class="radio">
-          <button type="button" class="btn btn-primary">Cheap</button>
-          <button type="button" class="btn btn-secondary">Moderate</button>
-          <button type="button" class="btn btn-success">BOUJIE</button>
-        </div>
+        <div class="form-group">
+           <label for="exampleSelect1">What food culture are you in the mood for?</label>
+           <select class="form-control" id="culture-input">
+             <option id="american">American</option>
+             <option id="italian">Italian</option>
+             <option id="mexican">Mexican</option>
+             <option id="chinese">Chinese</option>
+             <option id="thai">Thai</option>
+           </select>
+         </div>
+         <div class="form-group">
+            <label for="exampleSelect1">What's your taste buds craving?</label>
+            <select class="form-control" id="buds-input">
+              <option id="sweet">Sweet</option>
+              <option id="sour">Sour</option>
+              <option id="bitter">Bitter</option>
+              <option id="salty">Salty</option>
+              <option id="savory">Savory</option>
+            </select>
+          </div>
+          <div class="form-group">
+             <label for="exampleSelect1">What's your price range?</label>
+             <select class="form-control" id="price-input">
+               <option id="cheap">Cheap</option>
+               <option id="moderate">Moderate</option>
+               <option id="boujie">BOUJIE</option>
+             </select>
+           </div>
+          <button type="submit" class="button">Get Your FeedBag</button>
+
+      </div>
     </div>
 
   </body>
