@@ -13,25 +13,31 @@ var database = firebase.database();
 database.ref().child("Users");
 
 
-var timeofday;
-var culture;
-var price;
+var userprefs ={
+
+ timeofday : "",
+ culture : "",
+ price : ""
+}
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    console.log(user);
+  } else {
+    // No user is signed in.
+  }
+});
 
 
 
+$("#submit").on("click", function(){
+  event.preventDefault();
 
-$("#submitbtn").on("click", function({
-        debugger
-        timeofday = $("#time-input").val();
-        culture = $("#culture-input").val();
-        price = $("#price-input").val();
+        userprefs.timeofday = $("#time-input").val();
+        userprefs.culture = $("#culture-input").val();
+        userprefs.price = $("#price-input").val();
 
         firebase.auth().onAuthStateChanged(function(user) {
-          firebase.database().ref('Users/' + user.uid).set({
-            timeofday: timeofday,
-            culture: culture,
-            price: price
-          })
-
-
-        })
+          firebase.database().ref('Users/' + user.displayName).set(userprefs);
+        });
+});
