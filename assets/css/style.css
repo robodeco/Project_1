@@ -1,0 +1,85 @@
+body {
+  background-image: url("../images/fruit.jpeg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin: auto;
+}
+
+
+.header {
+  background-color: none;
+  color: #000;
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}
+
+.body {
+  margin: auto;
+  margin-top: 30px;
+  background-color: yellow;
+  width: 50%;
+  border-radius: 25px;
+
+}
+
+.card-header {
+  background-color: #483D8B;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 25px;
+}
+
+.card {
+  margin: auto;
+  margin-top: 50px;
+  width: 40%;
+  background-color: #54A449;
+  border-radius: 50px;
+}
+
+.card-body {
+  text-align: center;
+}
+
+.form-group {
+  margin: auto;
+  color: white;
+  width: 90%;
+  padding-top: 10px;
+}
+
+.button {
+  background-color: #FFFF00;
+  color: black;
+  margin: 20px;
+  text-align: center;
+  width: 50%;
+}
+
+h1 {
+  color: black;
+  font-family: Food, Helvetica, Arial, sans-serif;
+  font-size: 180px;
+  margin-bottom: 0;
+}
+
+
+
+.lead {
+  color: black;
+  font-size: 96px;
+  font-family: Writing, Helvetica, Arial, sans-serif;
+  border-top: 2.5px solid black;
+}
+
+@font-face {
+  font-family: Food;
+  src: url("../images/food.ttf");
+}
+
+@font-face {
+  font-family: Writing;
+  src: url("../images/writing.otf");
+}
