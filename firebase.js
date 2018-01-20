@@ -21,29 +21,6 @@ var database = firebase.database();
 database.ref().child("Users");
 
 
-
-// function toarray(snapshot) {
-//   var returnArr = [];
-//
-//   snapshot.forEach(function(childSnapshot) {
-//     var item = childSnapshot.val();
-//     // item.key = childSnapshot.Firstname;
-//     returnArr.push(item);
-//   });
-//
-//   return returnArr;
-//   console.log (returnArr);
-// };
-//
-// function createarray(){
-//   database.ref("/Users").on("value", function(snapshot) {
-//
-//     var array = toarray(snapshot);
-//
-// });
-//
-// }
-
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 ui.start('#firebaseui-auth-container', {
      signInOptions : [
@@ -69,7 +46,7 @@ var uiConfig = {
   },
   // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
   signInFlow: 'popup',
-  signInSuccessUrl: '<url-to-redirect-to-on-success>',
+  signInSuccessUrl: 'https://scruffylookingnerfherder.github.io/Project_1/',
   signInOptions: [
     // Leave the lines as is for the providers you want to offer your users.
     firebase.auth.EmailAuthProvider.PROVIDER_ID,
@@ -110,7 +87,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     var providerData = user.providerData;
 
 
-    
+
 
     // ...
   } else {
