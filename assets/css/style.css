@@ -15,6 +15,11 @@ body {
   border-radius: 25px;
 }
 
+.signinpopup{
+  margin-top: 30px;
+
+}
+
 .body {
   margin: auto;
   margin-top: 30px;
@@ -55,11 +60,17 @@ body {
   width: 50%;
 }
 
-h1 {
+.title {
   color: #fff;
   font-family: Writing, Helvetica, Arial, sans-serif;
   font-size: 150px;
   margin-bottom: 0;
+}
+
+h1 {
+  font-family: Food, Helvetica, Arial, sans-serif;
+  
+
 }
 
 .lead {

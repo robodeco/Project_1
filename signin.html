@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Food Coding Stars | FeedBag</title>
 
-    <link rel="stylesheet" type ="text/css" href="assets/css/reset.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
-  </head>
+<head>
+  <meta charset="utf-8">
+  <title>Food Coding Stars | FeedBag</title>
 
-  <body>
+  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+  <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+
+<body>
+
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="title">Feedbag</h1>
+
+      <p class="lead">Discover Your Cravings!</p>
+    </div>
+  </div>
+  <div id="firebaseui-auth-container" class="signinpopup"></div>
+  <div id="loader" class= "signinpopup">Loading...</div>
 
 
 
-      <div class="header">
-        <h1>FeedBag</h1>
 
-        <p class="lead">Discover Your Cravings!</p>
-      </div>
-      <div id="firebaseui-auth-container"></div>
-      <div id="loader">Loading...</div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+<script src="assets/javascript/signinpage.js"></script>
 
-                
-
-
-  </body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
-  <script src="firebase.js"></script>
 </html>

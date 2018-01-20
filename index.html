@@ -27,10 +27,10 @@
 <div class="card">
 <!--  <h5 class="card-header">Questionnaire</h5> !-->
   <div class="card-body">
-
-      <div class="form-group">
-         <label for="exampleSelect1">What time of day is it?</label>
-         <select class="form-control" id="time-input">
+    <form>
+      <div class="form-group" >
+         <label for="exampleSelect1" id="time-input">What time of day is it?</label >
+         <select class="form-control" >
            <option id="breakfast">Breakfast</option>
            <option id="lunch">Lunch</option>
            <option id="dinner">Dinner</option>
@@ -44,9 +44,9 @@
             <option id="omnivore">Omnivore</option>
           </select>
         </div> -->
-        <div class="form-group">
+        <div class="form-group" id="culture-input">
            <label for="exampleSelect1">What food culture are you in the mood for?</label>
-           <select class="form-control" id="culture-input">
+           <select class="form-control" >
              <option id="american">American</option>
              <option id="italian">Italian</option>
              <option id="mexican">Mexican</option>
@@ -73,16 +73,17 @@
 
            </select>
          </div>
-          <div class="form-group">
+          <div class="form-group" id="price-input">
              <label for="exampleSelect1">What's your price range?</label>
-             <select class="form-control" id="price-input">
+             <select class="form-control" >
                <option id="cheap">Cheap</option>
                <option id="affordable">Affordable</option>
                <option id="moderate">Moderate</option>
                <option id="boujie">BOUJIE</option>
              </select>
            </div>
-          <button type="submit" class="button">Get Your FeedBag</button>
+          <button type="submit" class="button" id="submitbtn">Get Your FeedBag</button>
+        </form>
       </div>
     </div>
 
@@ -101,5 +102,5 @@
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
-  <script src="firebase.js"></script>
+  <script src="assets/javascript/indexjs.js"></script>
 </html>
