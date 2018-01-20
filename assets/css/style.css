@@ -6,22 +6,38 @@ body {
   margin: auto;
 }
 
+.total {
+  margin: auto;
+  width: 50%;
+}
+
 .jumbotron {
   background-image: url("../images/form.jpeg");
   margin: auto;
   margin-top: 25px;
-  width: 50%;
+  width: 100%;
   text-align: center;
   border-radius: 25px;
 }
 
-.body {
+.title {
+  font-size: 200px;
+}
+
+.half-card .card-body {
   margin: auto;
   margin-top: 30px;
-  background-color: yellow;
   width: 50%;
   border-radius: 25px;
+}
 
+div.card.half-card{
+  width:50%;
+  float:left;
+}
+
+.results {
+  width: 100%;
 }
 
 .card-header {
@@ -34,7 +50,7 @@ body {
 .card {
   margin: auto;
   margin-top: 50px;
-  width: 40%;
+  width: 100%;
   text-align: center;
   background-image: url("../images/form.jpeg");
   border-radius: 50px;
@@ -69,6 +85,25 @@ h1 {
   border-top: 2.5px solid black;
 }
 
+.restaurants {
+  font-family: Writing, Helvetica, Arial, sans-serif;
+  float: left;
+  color: white;
+  font-size: 60px;
+}
+
+.recipes {
+  font-family: Writing, Helvetica, Arial, sans-serif;
+  float: left;
+  color: white;
+  font-size: 60px;
+}
+
+label {
+  font-family: Writing, Helvetica, Arial, sans-serif;
+  font-size: 50px;
+  color: yellow;
+}
 @font-face {
   font-family: Food;
   src: url("../images/food.ttf");

@@ -6,12 +6,13 @@
 
     <link rel="stylesheet" type ="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   </head>
 
   <body>
 +
-
+<div class="total">
     <div class="jumbotron">
       <div class="container">
         <h1 class="title">Feedbag</h1>
@@ -21,18 +22,19 @@
 
                       <!-- Questionnaire !-->
 
+
 <div class="card">
 <!--  <h5 class="card-header">Questionnaire</h5> !-->
   <div class="card-body">
 
-      <div class="form-group">
+      <!-- <div class="form-group">
          <label for="exampleSelect1">What time of day is it?</label>
-         <select class="form-control" id="time-input">
-           <option id="breakfast">Breakfast</option>
-           <option id="lunch">Lunch</option>
-           <option id="dinner">Dinner</option>
-         </select>
-       </div>
+
+           <button type="button" class="btn btn-primary">Breakfast</button>
+           <button type="button" class="btn btn-secondary">Lunch</button>
+           <button type="button" class="btn btn-success">Dinner</button>
+
+       </div> -->
        <!-- <div class="form-group">
           <label for="exampleSelect1">What type of eater are you?</label>
           <select class="form-control" id="type-input">
@@ -43,7 +45,31 @@
         </div> -->
         <div class="form-group">
            <label for="exampleSelect1">What food culture are you in the mood for?</label>
-           <select class="form-control" id="culture-input">
+           <button type="button" class="btn btn-primary cuisineButton" value="american&">American</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="italian&">Italian</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="mexican&">Mexican</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="chinese&">Chinese</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="thai&">Thai</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="afghanistan&">Afghanistan</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="african&">African</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="brazilian&">Brazilian</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="british&">British</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="caribbean&">Caribbean</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="european&">Eurpean</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="ethiopian&">Ethiopian</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="filipino&">Filipino</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="indonesian&">Indonesian</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="japanese&">Japanese</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="lebanese&">Lebanese</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="mediterranean&">Mediterranean</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="moroccan&">Moroccan</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="peruvian&">Peruvian</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="portuguesen&">Portuguese</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="russian&">Russian</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="vietnamese&">Vietnamese</button>
+           <button type="button" class="btn btn-primary cuisineButton" value="vegetarian&">Vegetarian</button>
+
+           <!-- <select class="form-control" id="culture-input">
              <option id="american">American</option>
              <option id="italian">Italian</option>
              <option id="mexican">Mexican</option>
@@ -68,32 +94,46 @@
              <option id="vietnamese">Vietnamese</option>
              <option id="vegetarian">Vegetarian</option>
 
-           </select>
+           </select> -->
          </div>
           <div class="form-group">
              <label for="exampleSelect1">What's your price range?</label>
-             <select class="form-control" id="price-input">
+             <button type="button" class="btn btn-primary">Cheap</button>
+             <button type="button" class="btn btn-primary">Affordable</button>
+             <button type="button" class="btn btn-primary">Moderate</button>
+             <button type="button" class="btn btn-primary">BOUJIE</button>
+             <!-- <select class="form-control" id="price-input">
                <option id="cheap">Cheap</option>
                <option id="affordable">Affordable</option>
                <option id="moderate">Moderate</option>
                <option id="boujie">BOUJIE</option>
-             </select>
+             </select> -->
            </div>
-          <button type="submit" class="button">Get Your FeedBag</button>
+          <button class="button" id="submit">Get Your FeedBag</button>
       </div>
     </div>
 
-      <div class="card">
-        <div class="card-header">
-          Quote
+    <div class="results">
+      <div class="card half-card" id="restaurants">
+        <div class="restaurants">
+          Restaurants
         </div>
-      <div class="card-body">
-      <blockquote class="blockquote mb-0">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-        <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-      </blockquote>
+        <div class="card-body">
+        </div>
+      </div>
+
+      <div class="card half-card">
+        <div class="recipes" id="recipes">
+          Recipes
+        </div>
+        <div class="card-body">
+        </div>
+      </div>
     </div>
+
   </div>
+
+<script src="assets/javascript/game.js"></script>
 
   </body>
 </html>
