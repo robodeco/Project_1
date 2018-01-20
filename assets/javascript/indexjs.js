@@ -21,11 +21,13 @@ var userprefs ={
 }
 
 firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    console.log(user);
-  } else {
-    // No user is signed in.
-  }
+  firebase.database().ref('Users/' + user.displayName).on("value", function (snapshot){
+    console.log(snapshot.val());
+    var prevculture = snapshot.val().culture;
+    var prevprice = snapshot.val().price;
+    var prevtimeofday = snapshot.val().timeofday;
+    console.log (prevculture + "," + prevprice + "," + prevtimeofday);
+  });
 });
 
 
