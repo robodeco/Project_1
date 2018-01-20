@@ -6,13 +6,13 @@ body {
   margin: auto;
 }
 
-
-.header {
-  background-color: none;
-  color: #000;
+.jumbotron {
+  background-image: url("../images/form.jpeg");
   margin: auto;
+  margin-top: 25px;
   width: 50%;
   text-align: center;
+  border-radius: 25px;
 }
 
 .body {
@@ -35,12 +35,9 @@ body {
   margin: auto;
   margin-top: 50px;
   width: 40%;
-  background-color: #54A449;
-  border-radius: 50px;
-}
-
-.card-body {
   text-align: center;
+  background-image: url("../images/form.jpeg");
+  border-radius: 50px;
 }
 
 .form-group {
@@ -59,17 +56,15 @@ body {
 }
 
 h1 {
-  color: black;
-  font-family: Food, Helvetica, Arial, sans-serif;
-  font-size: 180px;
+  color: #fff;
+  font-family: Writing, Helvetica, Arial, sans-serif;
+  font-size: 150px;
   margin-bottom: 0;
 }
 
-
-
 .lead {
-  color: black;
-  font-size: 96px;
+  color: #fff;
+  font-size: 82px;
   font-family: Writing, Helvetica, Arial, sans-serif;
   border-top: 2.5px solid black;
 }
