@@ -25,7 +25,7 @@ function showPosition(position) {
   // console.log(long);
 
   $(".cuisineButton").on("click", function() {
-    cuisineVal +=$(this).val();
+    cuisineVal +=$(this).val() + "&";
 
     finalQueryURL = queryBaseURL + "search?q=" + cuisineVal + "lat=" + lat + "&lon=" + long
 
