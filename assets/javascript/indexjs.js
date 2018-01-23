@@ -1,3 +1,5 @@
+
+//firebase
 var config = {
   apiKey: "AIzaSyCCePhrTpJl2GV9MRff0_-3GTUs4zYB6WQ",
   authDomain: "foodcodingstarsfeed.firebaseapp.com",
@@ -12,6 +14,7 @@ var database = firebase.database();
 
 database.ref().child("Users");
 
+//variables
 var culturepick = "";
 var userprefs = {
   // timeofday : "",
@@ -22,6 +25,7 @@ var userprefs = {
 var cuisines = ["American", "Italian", "Mexican", "Chinese", "Thai", "Afghanistan", "African", "Brazilian", "Caribbean", "European", "Ethiopian", "Filipino", "Indonesian", "Japanese", "Lebanese", "Mediterranean", "Moroccan", "Peruvian", "Portuguese", "Russian", "Vietnamese", "Vegetarian"]
 var CuisinesButtonsFinished = [];
 
+//function definitions
 
 //create cuisine buttons
 function renderbuttons() {
@@ -41,8 +45,6 @@ function renderbuttons() {
   };
 };
 
-renderbuttons();
-
 
 //if cuisine button is clicked, give it a attr of "checked". If it is unclicked,change to "unclicked"
 function checkFunction() {
@@ -59,6 +61,7 @@ $(document).on("click", ".cuisineButton", checkFunction);
 
 
 //pull previous search terms from firebase for logged in user
+function previous (){
 firebase.auth().onAuthStateChanged(function(user) {
   firebase.database().ref('Users/' + user.displayName).on("value", function(snapshot) {
     console.log(snapshot.val());
@@ -66,10 +69,20 @@ firebase.auth().onAuthStateChanged(function(user) {
     var prevprice = snapshot.val().price;
     // var prevtimeofday = snapshot.val().timeofday;
     console.log(prevculture + "," + prevprice);
+    //renders a previous search button if previous terms exist for user
+    if (prevculture != ""){
+      var previousbutton = $("<button>");
+      previousbutton.addClass("btn btn-primary signout");
+      previousbutton.text("See Your Previous Results!");
+      $("#prevresults").append(previousbutton);
+
+    }
   });
 });
+};
 
 
+//loop through buttons for "checked" function. If there, add value to culture(s) picked
 function GetCuisinePrefs() {
   for (var j = 0; j < CuisinesButtonsFinished.length; j++) {
     var newchecker = CuisinesButtonsFinished[j].attr("checker");
@@ -79,6 +92,11 @@ function GetCuisinePrefs() {
   };
 };
 
+//call independent functions
+renderbuttons();
+previous();
+
+//clickhandlers
 
 $("#submit").on("click", function() {
   event.preventDefault();
