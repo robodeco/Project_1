@@ -3,6 +3,7 @@ body {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   margin: auto;
 }
 
@@ -20,20 +21,11 @@ body {
   border-radius: 25px;
 }
 
-<<<<<<< HEAD
-.signinpopup{
-  margin-top: 30px;
-
-}
-
-.body {
-=======
 .title {
   font-size: 200px;
 }
 
 .half-card .card-body {
->>>>>>> origin
   margin: auto;
   margin-top: 30px;
   width: 50%;
@@ -80,17 +72,11 @@ div.card.half-card{
   width: 50%;
 }
 
-.title {
+h1 {
   color: #fff;
   font-family: Writing, Helvetica, Arial, sans-serif;
   font-size: 150px;
   margin-bottom: 0;
-}
-
-h1 {
-  font-family: Food, Helvetica, Arial, sans-serif;
-  
-
 }
 
 .lead {

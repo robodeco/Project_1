@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -8,23 +8,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
-
   </head>
 
   <body>
-<<<<<<< HEAD
 
-
-=======
-+
 <div class="total">
->>>>>>> origin
     <div class="jumbotron">
       <div class="container">
         <h1 class="title">Feedbag</h1>
-
         <p class="lead">Discover Your Cravings!</p>
       </div>
     </div>
@@ -35,27 +26,13 @@
 <div class="card">
 <!--  <h5 class="card-header">Questionnaire</h5> !-->
   <div class="card-body">
-<<<<<<< HEAD
-    <form>
-      <div class="form-group" >
-         <label for="exampleSelect1" >What time of day is it?</label >
-         <select class="form-control" id="time-input" >
-           <option id="breakfast" >Breakfast</option>
-           <option id="lunch" >Lunch</option>
-           <option id="dinner" >Dinner</option>
-         </select>
-       </div>
-=======
 
       <!-- <div class="form-group">
          <label for="exampleSelect1">What time of day is it?</label>
-
            <button type="button" class="btn btn-primary">Breakfast</button>
            <button type="button" class="btn btn-secondary">Lunch</button>
            <button type="button" class="btn btn-success">Dinner</button>
-
        </div> -->
->>>>>>> origin
        <!-- <div class="form-group">
           <label for="exampleSelect1">What type of eater are you?</label>
           <select class="form-control" id="type-input">
@@ -65,64 +42,13 @@
           </select>
         </div> -->
         <div class="form-group">
-           <label for="exampleSelect1">What food culture are you in the mood for?</label>
-<<<<<<< HEAD
-           <select class="form-control"  id="culture-input" >
-=======
-           <button type="button" class="btn btn-primary cuisineButton" value="american&">American</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="italian&">Italian</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="mexican&">Mexican</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="chinese&">Chinese</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="thai&">Thai</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="afghanistan&">Afghanistan</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="african&">African</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="brazilian&">Brazilian</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="british&">British</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="caribbean&">Caribbean</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="european&">Eurpean</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="ethiopian&">Ethiopian</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="filipino&">Filipino</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="indonesian&">Indonesian</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="japanese&">Japanese</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="lebanese&">Lebanese</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="mediterranean&">Mediterranean</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="moroccan&">Moroccan</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="peruvian&">Peruvian</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="portuguesen&">Portuguese</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="russian&">Russian</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="vietnamese&">Vietnamese</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="vegetarian&">Vegetarian</button>
-
-           <!-- <select class="form-control" id="culture-input">
->>>>>>> origin
-             <option id="american">American</option>
-             <option id="italian">Italian</option>
-             <option id="mexican">Mexican</option>
-             <option id="chinese">Chinese</option>
-             <option id="thai">Thai</option>
-             <option id="afghanistan">Afghanistan</option>
-             <option id="african">African</option>
-             <option id="brazilian">Brazilian</option>
-             <option id="british">British</option>
-             <option id="caribbean">Caribbean</option>
-             <option id="european">European</option>
-             <option id="ethiopian">Ethiopian</option>
-             <option id="filipino">Filipino</option>
-             <option id="indonesian">Indonesian</option>
-             <option id="japanese">Japanese</option>
-             <option id="lebanese">Lebanese</option>
-             <option id="mediterranean">Mediterranean</option>
-             <option id="moroccan">Moroccan</option>
-             <option id="peruvian">Peruvian</option>
-             <option id="portuguese">Portuguese</option>
-             <option id="lebanese">Russian</option>
-             <option id="vietnamese">Vietnamese</option>
-             <option id="vegetarian">Vegetarian</option>
-
-           </select> -->
+          <form>
+           <label for="exampleSelect1" id = "culture-input">What food culture are you in the mood for?</label>
          </div>
-          <div class="form-group" >
-             <label for="exampleSelect1">What's your price range?</label>
+           <div id="BtnDisplay"></div>
+         
+          <div class="form-group">
+             <label for="exampleSelect1" id = "price-input">What's your price range?</label>
              <button type="button" class="btn btn-primary">Cheap</button>
              <button type="button" class="btn btn-primary">Affordable</button>
              <button type="button" class="btn btn-primary">Moderate</button>
@@ -134,12 +60,8 @@
                <option id="boujie">BOUJIE</option>
              </select> -->
            </div>
-<<<<<<< HEAD
-          <button type="submit" class="button" id="submit">Get Your FeedBag</button>
+          <button class="button" id="submit" type="submit">Get Your FeedBag</button>
         </form>
-=======
-          <button class="button" id="submit">Get Your FeedBag</button>
->>>>>>> origin
       </div>
     </div>
 
@@ -164,10 +86,9 @@
   </div>
 
 <script src="assets/javascript/game.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+<script src="assets/javascript/indexjs.js"></script>
 
   </body>
-
-  <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="assets/javascript/indexjs.js"></script>
 </html>
