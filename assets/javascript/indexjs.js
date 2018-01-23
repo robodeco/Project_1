@@ -95,3 +95,11 @@ $("#submit").on("click", function() {
     firebase.database().ref('Users/' + user.displayName).set(userprefs);
   });
 });
+
+$("#signoutbutton").on("click", function() {
+  firebase.auth().signOut().then(function() {
+    // Sign-out successful.
+  }).catch(function(error) {
+    // An error happened.
+  });
+});
