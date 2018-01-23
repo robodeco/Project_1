@@ -3,6 +3,7 @@ body {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   margin: auto;
 }
 
@@ -18,6 +19,7 @@ body {
   width: 100%;
   text-align: center;
   border-radius: 25px;
+  border-color: black;
 }
 
 .title {
@@ -65,10 +67,17 @@ div.card.half-card{
 
 .button {
   background-color: #FFFF00;
+  border-style: outset;
   color: black;
   margin: 20px;
   text-align: center;
   width: 50%;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.button:hover {
+  background: #00FF00
 }
 
 h1 {
@@ -90,6 +99,7 @@ h1 {
   float: left;
   color: white;
   font-size: 60px;
+  border-bottom: 2.5px solid white;
 }
 
 .recipes {
@@ -97,6 +107,7 @@ h1 {
   float: left;
   color: white;
   font-size: 60px;
+  border-bottom: 2.5px solid white;
 }
 
 label {
@@ -104,6 +115,36 @@ label {
   font-size: 50px;
   color: yellow;
 }
+
+.countries {
+  background-image: url("../images/white.jpeg");
+  color: black;
+  margin-bottom: 20px;
+  border-bottom: 1.5px solid black;
+  border-radius: 50px;
+
+}
+
+.links {
+  font-family: Menu, Helvetica, Arial, sans-serif;
+  font-size: 40px;
+  color: black;
+}
+
+.cuisineButton {
+  background-image: url("../images/wall.jpeg");
+  margin: 5px;
+  color: black;
+  border-color: black;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.cuisineButton:hover {
+  background: #FF0000;
+  -webkit-transform: scale(1.1);
+}
+
 @font-face {
   font-family: Food;
   src: url("../images/food.ttf");
@@ -112,4 +153,9 @@ label {
 @font-face {
   font-family: Writing;
   src: url("../images/writing.otf");
+}
+
+@font-face {
+  font-family: Menu;
+  src: url("../images/bold.otf");
 }

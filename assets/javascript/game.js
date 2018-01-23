@@ -27,7 +27,7 @@ function showPosition(position) {
   $(".cuisineButton").on("click", function() {
     cuisineVal +=$(this).val();
 
-    finalQueryURL = queryBaseURL + "search?q=" + cuisineVal + "lat=" + lat + "&lon=" + long
+    finalQueryURL = queryBaseURL + "search?q=" + cuisineVal + "lat=" + lat + "&lon=" + long + "&count=3"
 
     console.log(cuisineVal);
     console.log(finalQueryURL);
@@ -58,12 +58,15 @@ console.log("https://developers.zomato.com/api/v2.1/search?lat=38.832801&lon=-77
 
        var restName = response.restaurants[i].restaurant.name
        console.log(restName);
-       var restWeb = response.restaurants[i].restaurant.url
+       var restWeb = "<a class='links' href ='" + response.restaurants[i].restaurant.url+"' target='_blank'>" + response.restaurants[i].restaurant.name +"</a>"
        console.log(restWeb);
-       var restLoca = response.restaurants[i].restaurant.location
+       var restLoca = response.restaurants[i].restaurant.location.address;
+       var image ="<img src='" + response.restaurants[i].restaurant.photos_url + "''></img>"
 
-        $("#restaurants").append("<div><p>" + restName + "</p><p>" + restWeb + "</p><p>" + restLoca + "</p><p>");
+
+
+        $("#restaurants").append("<div class='countries'><p>" + restWeb + "</p><p>");
       }
-    });
+    })
   });
   });
