@@ -78,6 +78,7 @@ function renderbuttons() {
     btns.addClass("btn btn-primary cuisineButton");
     btns.attr("checker", "unchecked");
     btns.attr("value", values);
+
     btns.text(cuisines[i]);
     $("#BtnDisplay").append(btns);
     CuisinesButtonsFinished.push(btns);
@@ -91,8 +92,10 @@ function checkFunction() {
   var ischecked = $(this).attr("checker");
   if (ischecked === "unchecked") {
     $(this).attr("checker", "checked");
+    $(this).attr("class", "btn btn-primary cuisineButton active" )
   } else {
     $(this).attr("checker", "unchecked");
+    $(this).attr("class", "btn btn-primary cuisineButton")
   }
 }
 
@@ -164,7 +167,8 @@ previous();
 //clickhandlers
 
 $("#submit").on("click", function() {
-  $("#restaurants").empty();
+
+
   event.preventDefault();
   GetCuisinePrefs();
   // console.log(culturepick);
@@ -191,6 +195,7 @@ $("#submit").on("click", function() {
     }
   })
   .done(function(response) {
+    $("#restaurants").empty();
 
   // console.log(response.restaurants);
 
@@ -212,7 +217,7 @@ $("#submit").on("click", function() {
   });
 
 
-    finalQueryURL2= queryBaseURL2 + "?q=" + culturepick;
+    finalQueryURL2= queryBaseURL2 + "?q=" + culturepick +"&count=5";
     console.log(finalQueryURL2);
     $.ajax({
       url: finalQueryURL2,
@@ -221,7 +226,7 @@ $("#submit").on("click", function() {
 
 
     .done(function(response) {
-
+      $("#recipes").empty();
 
       var recipes = JSON.parse(response)
       console.log(recipes);
@@ -230,7 +235,7 @@ $("#submit").on("click", function() {
       console.log(recipeArr);
 
       for (var i = 0; i < recipeArr.length; i++) {
-        
+
 
           var recipecontainer= $("<div class='reciperesponse'>")
           var recipetitle = recipeArr[i].title;

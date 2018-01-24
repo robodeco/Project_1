@@ -140,6 +140,10 @@ label {
   font-weight: bold;
 }
 
+.clicked{
+  background-color: blue;
+}
+
 .cuisineButton:hover {
   background: #FF0000;
   -webkit-transform: scale(1.1);
