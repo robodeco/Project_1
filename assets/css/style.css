@@ -29,7 +29,7 @@ body {
 .half-card .card-body {
   margin: auto;
   margin-top: 30px;
-  width: 50%;
+  width: 100%;
   border-radius: 25px;
 }
 
@@ -143,6 +143,14 @@ label {
 .cuisineButton:hover {
   background: #FF0000;
   -webkit-transform: scale(1.1);
+}
+
+.reciperesponse{
+  background-image: url("../images/white.jpeg");
+  color: black;
+  margin-bottom: 20px;
+  border-bottom: 1.5px solid black;
+  border-radius: 50px;
 }
 
 @font-face {

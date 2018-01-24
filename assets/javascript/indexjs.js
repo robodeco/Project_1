@@ -38,6 +38,9 @@ var cuisines = ["American", "Italian", "Mexican", "Chinese", "Thai", "Afghanista
 var CuisinesButtonsFinished = [];
 var finalQueryURL;
 var queryBaseURL = "https://developers.zomato.com/api/v2.1/";
+var finalQueryURL2;
+var queryBaseURL2 = "https://proxy.calweb.xyz/http://www.recipepuppy.com/api/";
+var cuisineVal2 = "";
 
 //function definitions
 
@@ -125,11 +128,11 @@ firebase.auth().onAuthStateChanged(function(user) {
     $("#signinorout").append(signInbutton);
   }
   firebase.database().ref('Users/' + user.displayName).on("value", function(snapshot) {
-    console.log(snapshot.val());
+    // console.log(snapshot.val());
     var prevculture = snapshot.val().culture;
     // var prevprice = snapshot.val().price;
     // var prevtimeofday = snapshot.val().timeofday;
-    console.log(prevculture + ",");
+    // console.log(prevculture + ",");
     //renders a previous search button if previous terms exist for user
     if (prevculture != ""){
       var previousbutton = $("<button>");
@@ -161,9 +164,10 @@ previous();
 //clickhandlers
 
 $("#submit").on("click", function() {
+  $("#restaurants").empty();
   event.preventDefault();
   GetCuisinePrefs();
-  console.log(culturepick);
+  // console.log(culturepick);
   userprefs.culture = culturepick;
   userprefs.previous = cultures;
 
@@ -177,7 +181,7 @@ $("#submit").on("click", function() {
   });
 
   finalQueryURL = queryBaseURL + "search?q=" + culturepick + "lat=" + lat + "&lon=" + long + "&count=5";
-  console.log(finalQueryURL);
+  // console.log(finalQueryURL);
   $.ajax({
     url: finalQueryURL,
     method: "GET",
@@ -196,51 +200,97 @@ $("#submit").on("click", function() {
 
 
     var restName = response.restaurants[i].restaurant.name
-    console.log(restName);
+    // console.log(restName);
     var restWeb = "<a class='links' href ='" + response.restaurants[i].restaurant.url+"' target='_blank'>" + response.restaurants[i].restaurant.name +"</a>"
-    console.log(restWeb);
+    // console.log(restWeb);
     var restLoca = response.restaurants[i].restaurant.location.address;
     // var image ="<img src='" + response.restaurants[i].restaurant.photos_url + "''></img>"
     var cost = response.restaurants[i].restaurant.average_cost_for_two;
 
     $("#restaurants").append("<div class='countries'><p>" + restWeb + "</p><p>");
-  }
-})
+    }
+  });
+
+
+    finalQueryURL2= queryBaseURL2 + "?q=" + culturepick;
+    console.log(finalQueryURL2);
+    $.ajax({
+      url: finalQueryURL2,
+      method:"GET",
+    })
+
+
+    .done(function(response) {
+
+
+      var recipes = JSON.parse(response)
+      console.log(recipes);
+
+      var recipeArr = recipes.results;
+      console.log(recipeArr);
+
+      for (var i = 0; i < recipeArr.length; i++) {
+        
+
+          var recipecontainer= $("<div class='reciperesponse'>")
+          var recipetitle = recipeArr[i].title;
+          var recipelink = "<a class = 'links' href= '" + recipeArr[i].href +"'target='_blank'>" + recipeArr[i].title +"</a>"
+          var recipethumb = recipeArr[i].thumbnail;
+          console.log(recipetitle, recipelink, recipethumb);
+          recipecontainer.append(recipetitle);
+          recipecontainer.append(recipelink);
+          recipecontainer.prepend(recipethumb);
+          $("#recipes").append("<div class='reciperesponse'><p>" + recipelink + "</p><p>");
+        }
+
+  });
+
   renderbuttons();
+})
+
+
+
 });
 
 
-// console.log("https://developers.zomato.com/api/v2.1/search?lat=38.832801&lon=-77.196229&cuisines=american%20steak%20brazilian");
 
-  //   $("#submit").on("click", function() {
-  //     // console.log("hi world");
-  //     // console.log(finalQueryURL);
-  //     $.ajax({
-  //       url: finalQueryURL,
-  //       method: "GET",
-  //       headers:
-  //       {
-  //         "user-key": "b585192e1aca10c32e449a9b7c13f1cd"
-  //       }
-  //     })
-  //     .done(function(response) {
-  //
-  //     // console.log(response.restaurants);
-  //
-  //      var results = response.restaurants;
-  //
-  //      for (var i = 0; i < results.length; i++) {
-  //
-  //      var restName = response.restaurants[i].restaurant.name
-  //      // console.log(restName);
-  //      var restWeb = response.restaurants[i].restaurant.url
-  //      // console.log(restWeb);
-  //      var restLoca = response.restaurants[i].restaurant.location.address
-  //
-  //
-  //
-  //       $("#restaurants").append("<div class='countries'><p>" + restWeb + "</p><p>");
-  //     }
-  //   })
-  // });
-  });
+
+
+
+// (document).ready(function() {
+
+//
+// $(".cuisineButton").on("click",function() {
+// cuisineVal2 +=$(this).val();
+//
+//
+// finalQueryURL2= queryBaseURL2 + "?q=" + culturepick;
+// console.log(finalQueryURL2);
+// $.ajax({
+//   url: finalQueryURL2,
+//   method:"GET",
+//
+// })
+// .done(function(response) {
+//
+//   // console.log(response);
+//   var resultsz = JSON.parse(response)
+//   console.log(resultsz);
+//
+//
+//
+//
+// })
+//     $("#submit").on("click", function() {
+//
+//
+//       $.ajax({
+//         url: finalQueryURL2,
+//         method:"GET",
+//
+//       })
+//       .done(function(response) {
+//
+//         // console.log(response);
+//         var resultsz = JSON.parse(response)
+//         console.log(resultsz);
