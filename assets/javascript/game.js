@@ -27,7 +27,7 @@ function showPosition(position) {
   $(".cuisineButton").on("click", function() {
     cuisineVal +=$(this).val() + "&";
 
-    finalQueryURL = queryBaseURL + "search?q=" + cuisineVal + "lat=" + lat + "&lon=" + long
+    finalQueryURL = queryBaseURL + "search?q=" + culturepick + "lat=" + lat + "&lon=" + long + "&count=3"
 
     // console.log(cuisineVal);
     // console.log(finalQueryURL);
@@ -60,10 +60,12 @@ function showPosition(position) {
        // console.log(restName);
        var restWeb = response.restaurants[i].restaurant.url
        // console.log(restWeb);
-       var restLoca = response.restaurants[i].restaurant.location
+       var restLoca = response.restaurants[i].restaurant.location.address
 
-        $("#restaurants").append("<div><p>" + restName + "</p><p>" + restWeb + "</p><p>" + restLoca + "</p><p>");
+
+
+        $("#restaurants").append("<div class='countries'><p>" + restWeb + "</p><p>");
       }
-    });
+    })
   });
   });

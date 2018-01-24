@@ -36,8 +36,32 @@ var cultures ="";
 
 var cuisines = ["American", "Italian", "Mexican", "Chinese", "Thai", "Afghanistan", "African", "Brazilian", "Caribbean", "European", "Ethiopian", "Filipino", "Indonesian", "Japanese", "Lebanese", "Mediterranean", "Moroccan", "Peruvian", "Portuguese", "Russian", "Vietnamese", "Vegetarian"]
 var CuisinesButtonsFinished = [];
+var finalQueryURL;
+var queryBaseURL = "https://developers.zomato.com/api/v2.1/";
 
 //function definitions
+
+//get user location
+$("document").ready(function () {
+var lat;
+var long;
+
+getLocation();
+
+function getLocation() {
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+} else {
+    alert("Geolocation is not supported by this browser.");
+}
+}
+
+function showPosition(position) {
+  lat = position.coords.latitude.toString();
+  long = position.coords.longitude.toString();
+  // console.log(lat);
+  // console.log(long);
+}
 
 //create cuisine buttons
 function renderbuttons() {
@@ -103,9 +127,9 @@ firebase.auth().onAuthStateChanged(function(user) {
   firebase.database().ref('Users/' + user.displayName).on("value", function(snapshot) {
     console.log(snapshot.val());
     var prevculture = snapshot.val().culture;
-    var prevprice = snapshot.val().price;
+    // var prevprice = snapshot.val().price;
     // var prevtimeofday = snapshot.val().timeofday;
-    console.log(prevculture + "," + prevprice);
+    console.log(prevculture + ",");
     //renders a previous search button if previous terms exist for user
     if (prevculture != ""){
       var previousbutton = $("<button>");
@@ -117,8 +141,6 @@ firebase.auth().onAuthStateChanged(function(user) {
   });
 });
 };
-
-
 
 
 //loop through buttons for "checked" function. If there, add value to culture(s) picked
@@ -144,13 +166,81 @@ $("#submit").on("click", function() {
   console.log(culturepick);
   userprefs.culture = culturepick;
   userprefs.previous = cultures;
-  renderbuttons();
+
 
   // userprefs.timeofday = $("#time-input").val();
   // userprefs.culture = culturepickpicker();
-  userprefs.price = $("#price-input").val();
+  // userprefs.price = $("#price-input").val();
 
   firebase.auth().onAuthStateChanged(function(user) {
     firebase.database().ref('Users/' + user.displayName).set(userprefs);
   });
+
+  finalQueryURL = queryBaseURL + "search?q=" + culturepick + "lat=" + lat + "&lon=" + long + "&count=5";
+  console.log(finalQueryURL);
+  $.ajax({
+    url: finalQueryURL,
+    method: "GET",
+    headers:
+    {
+      "user-key": "b585192e1aca10c32e449a9b7c13f1cd"
+    }
+  })
+  .done(function(response) {
+
+  // console.log(response.restaurants);
+
+   var results = response.restaurants;
+
+   for (var i = 0; i < results.length; i++) {
+
+
+    var restName = response.restaurants[i].restaurant.name
+    console.log(restName);
+    var restWeb = "<a class='links' href ='" + response.restaurants[i].restaurant.url+"' target='_blank'>" + response.restaurants[i].restaurant.name +"</a>"
+    console.log(restWeb);
+    var restLoca = response.restaurants[i].restaurant.location.address;
+    // var image ="<img src='" + response.restaurants[i].restaurant.photos_url + "''></img>"
+    var cost = response.restaurants[i].restaurant.average_cost_for_two;
+
+    $("#restaurants").append("<div class='countries'><p>" + restWeb + "</p><p>");
+  }
+})
+  renderbuttons();
 });
+
+
+// console.log("https://developers.zomato.com/api/v2.1/search?lat=38.832801&lon=-77.196229&cuisines=american%20steak%20brazilian");
+
+  //   $("#submit").on("click", function() {
+  //     // console.log("hi world");
+  //     // console.log(finalQueryURL);
+  //     $.ajax({
+  //       url: finalQueryURL,
+  //       method: "GET",
+  //       headers:
+  //       {
+  //         "user-key": "b585192e1aca10c32e449a9b7c13f1cd"
+  //       }
+  //     })
+  //     .done(function(response) {
+  //
+  //     // console.log(response.restaurants);
+  //
+  //      var results = response.restaurants;
+  //
+  //      for (var i = 0; i < results.length; i++) {
+  //
+  //      var restName = response.restaurants[i].restaurant.name
+  //      // console.log(restName);
+  //      var restWeb = response.restaurants[i].restaurant.url
+  //      // console.log(restWeb);
+  //      var restLoca = response.restaurants[i].restaurant.location.address
+  //
+  //
+  //
+  //       $("#restaurants").append("<div class='countries'><p>" + restWeb + "</p><p>");
+  //     }
+  //   })
+  // });
+  });
