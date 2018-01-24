@@ -11,7 +11,8 @@
   </head>
 
   <body>
-+
+
+
 <div class="total">
     <div class="jumbotron">
       <div class="container">
@@ -20,6 +21,12 @@
       </div>
     </div>
 
+    <!-- signout button -->
+
+    <h3 id= "usernamedisplay" class="UNDisplay"></h3>
+    <div id= "signinorout"></div>
+
+    <div id="prevresults"></div>
                       <!-- Questionnaire !-->
 
 
@@ -27,62 +34,30 @@
 <!--  <h5 class="card-header">Questionnaire</h5> !-->
   <div class="card-body">
 
+
+      <!-- <div class="form-group">
+         <label for="exampleSelect1">What time of day is it?</label>
+           <button type="button" class="btn btn-primary">Breakfast</button>
+           <button type="button" class="btn btn-secondary">Lunch</button>
+           <button type="button" class="btn btn-success">Dinner</button>
+       </div> -->
+       <!-- <div class="form-group">
+          <label for="exampleSelect1">What type of eater are you?</label>
+          <select class="form-control" id="type-input">
+            <option id="carnivore">Carnivore</option>
+            <option id="herbivore">Herbivore</option>
+            <option id="omnivore">Omnivore</option>
+          </select>
+        </div> -->
         <div class="form-group">
-           <label for="exampleSelect1">What food culture are you in the mood for?</label>
-           <button type="button" class="btn btn-primary cuisineButton" value="american&">American</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="italian&">Italian</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="mexican&">Mexican</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="chinese&">Chinese</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="thai&">Thai</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="afghanistan&">Afghanistan</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="african&">African</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="brazilian&">Brazilian</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="british&">British</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="caribbean&">Caribbean</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="european&">European</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="ethiopian&">Ethiopian</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="filipino&">Filipino</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="indonesian&">Indonesian</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="japanese&">Japanese</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="lebanese&">Lebanese</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="mediterranean&">Mediterranean</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="moroccan&">Moroccan</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="peruvian&">Peruvian</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="portuguesen&">Portuguese</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="russian&">Russian</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="vietnamese&">Vietnamese</button>
-           <button type="button" class="btn btn-primary cuisineButton" value="vegetarian&">Vegetarian</button>
 
-        </div>
-           <!-- <select class="form-control" id="culture-input">
-             <option id="american">American</option>
-             <option id="italian">Italian</option>
-             <option id="mexican">Mexican</option>
-             <option id="chinese">Chinese</option>
-             <option id="thai">Thai</option>
-             <option id="afghanistan">Afghanistan</option>
-             <option id="african">African</option>
-             <option id="brazilian">Brazilian</option>
-             <option id="british">British</option>
-             <option id="caribbean">Caribbean</option>
-             <option id="european">European</option>
-             <option id="ethiopian">Ethiopian</option>
-             <option id="filipino">Filipino</option>
-             <option id="indonesian">Indonesian</option>
-             <option id="japanese">Japanese</option>
-             <option id="lebanese">Lebanese</option>
-             <option id="mediterranean">Mediterranean</option>
-             <option id="moroccan">Moroccan</option>
-             <option id="peruvian">Peruvian</option>
-             <option id="portuguese">Portuguese</option>
-             <option id="lebanese">Russian</option>
-             <option id="vietnamese">Vietnamese</option>
-             <option id="vegetarian">Vegetarian</option>
+           <label for="exampleSelect1" id = "culture-input">What food culture are you in the mood for?</label>
 
 
-         </div>
-          <div class="form-group">
-             <label for="exampleSelect1">What's your price range?</label>
+           <div id="BtnDisplay"></div>
+
+          <!-- <div class="form-group">
+             <label for="exampleSelect1" id = "price-input">What's your price range?</label>
              <button type="button" class="btn btn-primary">Cheap</button>
              <button type="button" class="btn btn-primary">Affordable</button>
              <button type="button" class="btn btn-primary">Moderate</button>
@@ -92,9 +67,14 @@
                <option id="affordable">Affordable</option>
                <option id="moderate">Moderate</option>
                <option id="boujie">BOUJIE</option>
-             </select> -->
+             </select>  -->
+
+           </div>
+
+
 
           <button class="button" id="submit">Get Your FeedBag</button>
+
       </div>
     </div>
 
@@ -119,6 +99,9 @@
   </div>
 
 <script src="assets/javascript/game.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+<script src="assets/javascript/indexjs.js"></script>
 
   </body>
 </html>
