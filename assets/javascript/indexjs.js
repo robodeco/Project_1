@@ -299,7 +299,18 @@ function recipesapi(){
         recipecontainer.append(recipetitle);
         recipecontainer.append(recipelink);
         recipecontainer.prepend(recipethumb);
-        $("#recipes").append("<div class='reciperesponse'><p>" + recipelink + "</p><p>");
+        var recipethumb = "<a href="+String(recipeArr[i].thumbnail);
+         var recipeingredient= recipeArr[i].ingredients;
+         // recipeArr[i].thumbnail;
+         // "<img src = thumbnail=''"+
+         console.log(recipetitle, recipelink, recipethumb, recipeingredient);
+         recipecontainer.append(recipetitle);
+         recipecontainer.append(recipelink);
+         recipecontainer.append(recipeingredient);
+         recipecontainer.prepend(recipethumb);
+
+         $("#recipes").append("<div class='reciperesponse'><p>"+ recipethumb + "</p><p>"+ recipelink + "</p><p>"+"Ingredients:"+ recipeingredient + "</p><p>");
+
       }
 
 });
