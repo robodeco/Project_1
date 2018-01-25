@@ -1,47 +1,47 @@
-//title
+//title animation
 var basicTimeline = anime.timeline();
 basicTimeline.add({
-targets: '#F',
- scale:1.5,
- duration: 300,
- easing: 'easeOutExpo'
-})
-.add({
-  targets: '#E',
-  scale:1.5,
-  duration: 300,
-   easing: 'easeOutExpo'
-})
-.add({
-  targets: '#E2',
-  scale:1.5,
-  duration: 300,
-   easing: 'easeOutExpo'
-})
-.add({
-  targets: '#D',
-  scale:1.5,
-  duration: 300,
-   easing: 'easeOutExpo'
-})
-.add({
-  targets: '#B',
-  scale:1.5,
-  duration: 300,
-   easing: 'easeOutExpo'
-})
-.add({
-  targets: '#A',
-  scale:1.5,
-  duration: 300,
-   easing: 'easeOutExpo'
-})
-.add({
-  targets: '#G',
-  scale:1.5,
-  duration: 300,
-   easing: 'easeOutExpo'
-})
+    targets: '#F',
+    scale: 1.5,
+    duration: 300,
+    easing: 'easeOutExpo'
+  })
+  .add({
+    targets: '#E',
+    scale: 1.5,
+    duration: 300,
+    easing: 'easeOutExpo'
+  })
+  .add({
+    targets: '#E2',
+    scale: 1.5,
+    duration: 300,
+    easing: 'easeOutExpo'
+  })
+  .add({
+    targets: '#D',
+    scale: 1.5,
+    duration: 300,
+    easing: 'easeOutExpo'
+  })
+  .add({
+    targets: '#B',
+    scale: 1.5,
+    duration: 300,
+    easing: 'easeOutExpo'
+  })
+  .add({
+    targets: '#A',
+    scale: 1.5,
+    duration: 300,
+    easing: 'easeOutExpo'
+  })
+  .add({
+    targets: '#G',
+    scale: 1.5,
+    duration: 300,
+    easing: 'easeOutExpo'
+  })
 
 
 
@@ -70,15 +70,15 @@ var userprefs = {
   price: "",
   previous: ""
 }
-var cultures ="";
+var cultures = "";
 prevculture = "";
 var usertemp = {
-  culture:"",
-  price:"",
-  previous:""
+  culture: "",
+  price: "",
+  previous: ""
 }
 
-var cuisines = ["American", "Italian", "Mexican", "Chinese", "Thai", "Afghan", "African", "Brazilian", "Caribbean", "European", "Ethiopian", "Filipino", "Indonesian", "Japanese", "Lebanese", "Mediterranean", "Moroccan", "Peruvian", "Portuguese", "Russian", "Vietnamese", "Vegetarian"]
+var cuisines = ["American", "Italian", "Mexican", "Chinese", "Thai", "Afghan", "African", "Brazilian", "Caribbean", "European", "Ethiopian", "Filipino", "Indonesian", "Japanese", "Lebanese", "Mediterranean", "Moroccan", "Peruvian", "Portuguese", "Russian", "Vietnamese", "Vegetarian", "Nepali"]
 var CuisinesButtonsFinished = [];
 var finalQueryURL;
 var queryBaseURL = "https://developers.zomato.com/api/v2.1/";
@@ -95,9 +95,11 @@ var userpricerange;
 
 //get the location
 function getLocation() {
-if (navigator.geolocation) {
+  if (navigator.geolocation) {
+    //get location through browser (asks user with a prompt)
     navigator.geolocation.getCurrentPosition(showPosition);
-} else {
+  } else {
+    //if browser doesn't support location services
     alert("Geolocation is not supported by this browser.");
   }
 }
@@ -111,19 +113,31 @@ function showPosition(position) {
 
 //create cuisine buttons
 function renderbuttons() {
+  //resets culturepick after a search
   culturepick = "";
+  //resets values for showing in the previous search button
   cultures = "";
+  //empties the buttons so user doesn't already have buttons clicked from last search
   $("#BtnDisplay").empty();
+  //empties the completeled buttons array
   CuisinesButtonsFinished = [];
+  //loops through the cuisines array
   for (var i = 0; i < cuisines.length; i++) {
+    //creates a button
     var btns = $("<button>");
+    //sets the values of the button
     var values = cuisines[i];
+    //sets the button's class
     btns.addClass("btn btn-primary cuisineButton");
+    //adds a checker attribute
     btns.attr("checker", "unchecked");
+    //applies the button value to the button
     btns.attr("value", values);
-
+    //labels the button for the DOM
     btns.text(cuisines[i]);
+    //appends all buttons to the display in the DOM
     $("#BtnDisplay").append(btns);
+    //pushes completed buttons to a completed array that can be looped through
     CuisinesButtonsFinished.push(btns);
 
   };
@@ -132,12 +146,19 @@ function renderbuttons() {
 
 //if cuisine button is clicked, give it a attr of "checked". If it is unclicked,change to "unclicked"
 function checkFunction() {
+  //sets ischecked to attr of the button that was clicked of "checker"
   var ischecked = $(this).attr("checker");
+  //if checker is not checked
   if (ischecked === "unchecked") {
+    //change attr to checked
     $(this).attr("checker", "checked");
-    $(this).attr("class", "btn btn-primary cuisineButton active" )
+    //change class to active to show on the DOM it has been clicked
+    $(this).attr("class", "btn btn-primary cuisineButton active")
+    //if checker is checked
   } else {
+    //change attr to unchecked
     $(this).attr("checker", "unchecked");
+    //remove the active class so the button appears unclicked
     $(this).attr("class", "btn btn-primary cuisineButton")
   }
 }
@@ -145,63 +166,89 @@ function checkFunction() {
 
 
 
-//pull previous search terms from firebase for logged in user
-function previous (){
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user){
-    var displayName=user.displayName;
-    $("#usernamedisplay").append("Welcome, " + displayName +"!");
-    var signOutbutton = $("<a>");
-    signOutbutton.addClass("btn btn-primary");
-    signOutbutton.attr("href", "signin.html");
-    signOutbutton.text("Not you? Sign Out");
-    signOutbutton.attr("id", "signout");
-    $("#signinorout").append(signOutbutton);
-    $("#signout").on("click", function() {
-      firebase.auth().signOut().then(function() {
-        // Sign-out successful.
-      }).catch(function(error) {
-        // An error happened.
+//previous terms and users function
+function previous() {
+  firebase.auth().onAuthStateChanged(function(user) {
+    //if user is logged in
+    if (user) {
+      //grab the display name of the current logged in user
+      var displayName = user.displayName;
+      //show the user name on the DOM
+      $("#usernamedisplay").append("Welcome " + displayName);
+      //create an anchor element for a signout button
+      var signOutbutton = $("<a>");
+      //add classes to the signout button to define it as a button
+      signOutbutton.addClass("btn btn-primary signbutton");
+      //give the signout button the correct href for our signin page
+      signOutbutton.attr("href", "signin.html");
+      //add text to teh btn for the DOM
+      signOutbutton.text("Not you? Sign Out");
+      //give the signout button an ID
+      signOutbutton.attr("id", "signout");
+      //append signout button to the DOM
+      $("#signinorout").append(signOutbutton);
+      //on click even for the signout button
+      $("#signout").on("click", function() {
+        //signout and redirect to signin page
+        firebase.auth().signOut().then(function() {
+          // Sign-out successful.
+        }).catch(function(error) {
+          // An error happened.
+        });
       });
-    });
-
-  } else{
-    var signInbutton = $("<a>");
-    signInbutton.addClass("btn btn-primary");
-    signInbutton.attr("href", "signin.html");
-    signInbutton.text("You are not signed in! Click here!")
-    $("#signinorout").append(signInbutton);
-  }
-  firebase.database().ref('Users/' + user.displayName).on("value", function(snapshot) {
-
-    prevculture = snapshot.val().culture;
-    previouscultures = snapshot.val().previous;
-    previousprice = snapshot.val().price;
-    // console.log(prevculture);
-    // console.log(previouscultures);
-
-    //renders a previous search button if previous terms exist for user
-    if (prevculture != ""){
-      $("#prevresults").empty();
-      var previousbutton = $("<button id=prevbutton>");
-      previousbutton.addClass("btn btn-primary prevbutton");
-      previousbutton.text("See Your Previous Results for " + previouscultures + " for $" + previousprice);
-      $("#prevresults").append(previousbutton);
-
+      //if user is not logged in
+    } else {
+      //create an anchor element for a signin button
+      var signInbutton = $("<a>");
+      //add classes to signin button to define it as a button
+      signInbutton.addClass("btn btn-primary signbutton");
+      //give the signin button href to our sigin page
+      signInbutton.attr("href", "signin.html");
+      //add text to sigin button
+      signInbutton.text("You are not signed in! Click here!")
+      //append signin button to DOM
+      $("#signinorout").append(signInbutton);
     }
+
+    //pull previous search terms for signed in user
+    firebase.database().ref('Users/' + user.displayName).on("value", function(snapshot) {
+
+      prevculture = snapshot.val().culture;
+      previouscultures = snapshot.val().previous;
+      previousprice = snapshot.val().price;
+
+
+      //renders a previous search button if previous terms exist for user
+      if (prevculture != "") {
+        //empties the div with the previous button
+        $("#prevresults").empty();
+        //creates a button with an id
+        var previousbutton = $("<button id=prevbutton>");
+        //adds class to define the button
+        previousbutton.addClass("btn btn-primary previousbutton");
+        //shows the previous search terms as text in the button
+        previousbutton.text("See Your Previous Results for " + previouscultures + " for $" + previousprice);
+        //appends the button to the DOM
+        $("#prevresults").append(previousbutton);
+
+      }
+    });
   });
-});
 };
 
 
-
-
-function previousbuttonfunction(){
+//defines what happens when previous search button is clicked
+function previousbuttonfunction() {
+  //sets userprice to 0
   userprice = 0;
+  //sets culturepick to previous cultures picked
   culturepick = prevculture;
+  //sets userprice to the previous price
   userprice = previousprice;
+  //calls all api's using above previous values
   restuarantsapi();
   recipesapi();
+  //calls the buttons to reset
   renderbuttons();
 }
 
@@ -209,8 +256,11 @@ function previousbuttonfunction(){
 //loop through buttons for "checked" function. If there, add value to culture(s) picked
 function GetCuisinePrefs() {
   for (var j = 0; j < CuisinesButtonsFinished.length; j++) {
+    //defines checked or unchecked within the button attrs as a variable
     var newchecker = CuisinesButtonsFinished[j].attr("checker");
+    //if attr is checked
     if (newchecker === "checked") {
+      //add the value to cultures and culturepick. Cultures shows in previous terms with the &, culturepick is operational for the APIs
       cultures += CuisinesButtonsFinished[j].val().trim() + ", ";
       culturepick += CuisinesButtonsFinished[j].val().trim().toLowerCase() + "&";
     };
@@ -218,131 +268,154 @@ function GetCuisinePrefs() {
 };
 
 //restaurant API call
-function restuarantsapi(){
+function restuarantsapi() {
+
   finalQueryURL = queryBaseURL + "search?q=" + culturepick + "lat=" + lat + "&lon=" + long + "&count=5";
-  // console.log(finalQueryURL);
+  //ajax call
   $.ajax({
-    url: finalQueryURL,
-    method: "GET",
-    headers:
-    {
-      "user-key": "b585192e1aca10c32e449a9b7c13f1cd"
-    }
-  })
-
-  .done(function(response) {
-    $("#restaurants").empty();
-  // console.log(response.restaurants);
-   var restresults = response.restaurants;
-   console.log(restresults);
-   for (var i = 0; i < restresults.length; i++) {
-    var restcontainer = $("<div class = 'countries'>");
-    var restName = restresults[i].restaurant.name;
-    var restlink = restresults[i].restaurant.url;
-    var restWeb = "<a class='links' href ='" + restlink + "' target='_blank'>" + restName +"</a>"
-    var restLoca = restresults[i].restaurant.location.address;
-    // var image ="<img src='" + response.restaurants[i].restaurant.photos_url + "''></img>"
-    var cost = restresults[i].restaurant.average_cost_for_two;
-    var priceRange = restresults[i].restaurant.price_range;
-
-    priceranges();
-    console.log("Userprice range" + userpricerange);
-    function pricechecker(){
-      if (userpricerange < restresults[i].restaurant.price_range){
-        return false;
+      url: finalQueryURL,
+      method: "GET",
+      headers: {
+        "user-key": "b585192e1aca10c32e449a9b7c13f1cd"
       }
-    }
-    pricechecker();
-    restcontainer.prepend(restWeb);
-    restcontainer.append("<p>")
-    restcontainer.append(restLoca);
-    restcontainer.append(cost);
-    if (pricechecker() !=false){
-    $("#restaurants").append(restcontainer);
-    }
-    }
-    if (restresults == []){
-      $("#restaurants").append("<h1> Oh No! Looks like there are no viable restaurants near you! Try again or pick a recipe! <h1>")
-    }
-  });
+    })
+
+    .done(function(response) {
+      //empty the previous search
+      $("#restaurants").empty();
+      // store results in a variable
+      var restresults = response.restaurants;
+      //loop through results
+      for (var i = 0; i < restresults.length; i++) {
+        //create a DIV to hold all restuarant info
+        var restcontainer = $("<div class = 'countries'>");
+        //determine name
+        var restName = restresults[i].restaurant.name;
+        //determine link
+        var restlink = restresults[i].restaurant.url;
+        //grabs the link and creates an anchor element using the name of the restaurant as the front facing element
+        var restWeb = "<a class='links' href ='" + restlink + "' target='_blank'>" + restName + "</a>"
+        //grabs the location
+        var restLoca = restresults[i].restaurant.location.address;
+        //grabs the price range
+        var priceRange = restresults[i].restaurant.price_range;
+        //runs the priceing function that determins the price range (1-4) of the user's input amount
+        priceranges();
+        //function to check if the user's price range is below results
+        function pricechecker() {
+          //if user price range is less than the range of the restuarant, return false
+          if (userpricerange < restresults[i].restaurant.price_range) {
+            return false;
+          }
+        }
+        //call the pricechecker function
+        pricechecker();
+        //prepend the link created above
+        restcontainer.prepend(restWeb);
+        //append an empty paragraph for space
+        restcontainer.append("<p>");
+        //append the location
+        restcontainer.append(restLoca);
+        //check if pricecheker returned false
+        if (pricechecker() != false) {
+          //if pricechecker did not return false, restauran is within price range and is shown
+          $("#restaurants").append(restcontainer);
+        }
+        //end the for loop
+      }
+      //if no results returned, append message
+      if (restresults == []) {
+        $("#restaurants").append("Oh No! Looks like there are no viable restaurants near you! Try again or pick a recipe!")
+      }
+      //end response function
+    });
 }
 
 
 
 //recipe API call
-function recipesapi(){
-  finalQueryURL2= queryBaseURL2 + "?q=" + culturepick +"&count=10";
-  // console.log(finalQueryURL2);
-  $.ajax({
-    url: finalQueryURL2,
-    method:"GET",
-  })
-
-
-  .done(function(response) {
-    $("#recipes").empty();
-
-    var recipes = JSON.parse(response)
-    // console.log(recipes);
-
-    var recipeArr = recipes.results;
-    // console.log(recipeArr);
-
-    for (var i = 0; i < recipeArr.length; i++) {
-
-
-        var recipecontainer= $("<div class='reciperesponse'>")
-        var recipetitle = recipeArr[i].title;
-        var recipelink = "<a class = 'links' href= '" + recipeArr[i].href +"'target='_blank'>" + recipeArr[i].title +"</a>"
-        var recipethumb = recipeArr[i].thumbnail;
-        // console.log(recipetitle, recipelink, recipethumb);
-        recipecontainer.append(recipetitle);
-        recipecontainer.append(recipelink);
-        recipecontainer.prepend(recipethumb);
-        var recipethumb = "<a href="+String(recipeArr[i].thumbnail);
-         var recipeingredient= recipeArr[i].ingredients;
-         // recipeArr[i].thumbnail;
-         // "<img src = thumbnail=''"+
-         console.log(recipetitle, recipelink, recipethumb, recipeingredient);
-         recipecontainer.append(recipetitle);
-         recipecontainer.append(recipelink);
-         recipecontainer.append(recipeingredient);
-         recipecontainer.prepend(recipethumb);
-
-         $("#recipes").append("<div class='reciperesponse'><p>"+ recipethumb + "</p><p>"+ recipelink + "</p><p>"+"Ingredients:"+ recipeingredient + "</p><p>");
-
-      }
-
-});
+function recipesapi() {
+  finalQueryURL2= queryBaseURL2 + "?q=" + culturepick +"&count=5"+"&oi=1";
+      console.log(finalQueryURL2);
+      $.ajax({
+        url: finalQueryURL2,
+        method:"GET",
+      })
+      .done(function(response) {
+        $("#recipes").empty();
+        var recipes = JSON.parse(response)
+        // console.log(recipes);
+        var recipeArr = recipes.results;
+        // console.log(recipeArr);
+        for (var i = 0; i < recipeArr.length; i++) {
+            var recipecontainer= $("<div class='reciperesponse'>")
+            var recipetitle = recipeArr[i].title;
+            var recipelink = "<a class = 'links' href= '" + recipeArr[i].href +"'target='_blank'>" + recipeArr[i].title +"</a>"
+            var recipethumb = recipeArr[i].thumbnail;
+            console.log("recipe thumbnail: ",recipethumb);
+            // console.log(recipetitle, recipelink, recipethumb);
+            recipecontainer.append(recipetitle);
+            recipecontainer.append(recipelink);
+            recipecontainer.prepend(recipethumb);
+            recipethumb = "<img class=recipeimg src="+String(recipeArr[i].thumbnail) + '>';
+             var recipeingredient= recipeArr[i].ingredients;
+             // recipeArr[i].thumbnail;
+             // "<img src = thumbnail=''"+
+             console.log(recipetitle, recipelink, recipethumb, recipeingredient);
+             recipecontainer.append(recipetitle);
+             recipecontainer.append(recipelink);
+             recipecontainer.append(recipeingredient);
+             recipecontainer.prepend(recipethumb);
+             $("#recipes").append("<div class='reciperesponse'><p>"+ recipethumb + "</p><p>"+ recipelink + "</p><p>"+"Ingredients:"+ recipeingredient + "</p><p>");
+          }
+      })
 }
 
-function validate(){
+//validation of user input
+function validate() {
+  //set the userprice to the user price input
+  userprice = $("#inlineFormInputGroup").val().trim();
+  //if user price is not a number, is not filled our, or no cultures are picked
+  if ((isNaN(userprice)) || (userprice == "") && (culturepick == "")) {
+    //trigger a modal
+    $("#submit").attr("data-target", "#invalid3")
 
-   userprice = $("#inlineFormInputGroup").val().trim();
-    if ((isNaN(userprice)) || (userprice =="")){
-      $("#submit").attr("data-target", "#invalid");
+    return false;
+    //if user price is not a number or filled out incorrectly
+  } else if ((isNaN(userprice)) || (userprice == "")) {
+    //trigger a modal
+    $("#submit").attr("data-target", "#invalid");
 
-      return false;
+    return false;
+    //if no cultures picked
+  } else if (culturepick == "") {
+    //trigger a modal
+    $("#submit").attr("data-target", "#invalid2")
 
-    }  else {
-      $("#submit").attr("data-target", "#success");
-      return true;
-    }
+    return false;
+    //if cultures are picked and price is input
+  } else {
+    //no modals
+    $("#submit").attr("data-target", "#success");
+    return true;
   }
+}
 
-function priceranges (){
-    if (userprice <=25){
-      userpricerange = 1;
-
-    } else if (userprice <= 50){
-      userpricerange = 2;
-
-    } else if (userprice <=75){
-      userpricerange = 3;
-
-    } else if (userprice >= 76){
-      userpricerange = 4;
-    }
+//takes user price input and arbitrarily grades on scale of 1-4 per Restaurant API ratings
+function priceranges() {
+  //if less than or equal to 25 rating is 1
+  if (userprice <= 25) {
+    userpricerange = 1;
+    //if less than or equal to 50 rating is 2
+  } else if (userprice <= 50) {
+    userpricerange = 2;
+    //if less than or equal to 75 rating is 3
+  } else if (userprice <= 75) {
+    userpricerange = 3;
+    //anything greather than 76 rating is 4
+  } else if (userprice >= 76) {
+    userpricerange = 4;
+  }
 
 }
 
@@ -353,12 +426,14 @@ renderbuttons();
 previous();
 
 
+
+
 //clickhandlers
 //click handler for all cuisine buttons to run the check function
 $(document).on("click", ".cuisineButton", checkFunction);
 
 //click handler for using the previous search terms entered
-$(document).on("click", ".prevbutton", previousbuttonfunction);
+$(document).on("click", ".previousbutton", previousbuttonfunction);
 
 
 
@@ -367,32 +442,42 @@ $(document).on("click", ".prevbutton", previousbuttonfunction);
 $("#submit").on("click", function() {
 
   event.preventDefault();
-  if (validate() == true){
-  userprefs.culture = usertemp.culture;
-  userprefs.previous = usertemp.previous;
-  userprefs.price = usertemp.price;
-  firebase.auth().onAuthStateChanged(function(user) {
-    firebase.database().ref('Users/' + user.displayName).set(userprefs);
-    });
+  //loops through buttons looking for checked attrs and adding to culturepicker
   GetCuisinePrefs();
-  usertemp.culture = culturepick;
-  usertemp.previous = cultures;
-  usertemp.price = userprice;
-  restuarantsapi();
-  recipesapi();
-  renderbuttons();
-  console.log(usertemp);
+  //validation
+  validate();
+  //only run if validate returns true
+  if (validate() == true) {
+    $("#inlineFormInputGroup").val("");
+    //push the terms of the last search to firebase
+    userprefs.culture = usertemp.culture;
+    userprefs.previous = usertemp.previous;
+    userprefs.price = usertemp.price;
+    firebase.auth().onAuthStateChanged(function(user) {
+      firebase.database().ref('Users/' + user.displayName).set(userprefs);
+    });
+    //store the current search terms in a temp object that will be pushed to firebase on the next click of submit or on reload
+    usertemp.culture = culturepick;
+    usertemp.previous = cultures;
+    usertemp.price = userprice;
+    //call API's and render the buttons
+    restuarantsapi();
+    recipesapi();
+    renderbuttons();
+    console.log(usertemp);
+
   }
 })
 
 
 //should the user click refresh without doing another search, the temp userobject is pushed to firebase to become the "previous search"
-$(window).on("unload", function (){
-  if (userprefs.culture != ""){
-  userprefs.culture = usertemp.culture;
-  userprefs.previous = usertemp.previous;
-  firebase.auth().onAuthStateChanged(function(user) {
-    firebase.database().ref('Users/' + user.displayName).set(userprefs);
+$(window).on("unload", function() {
+  if (usertemp.culture != "") {
+    userprefs.culture = usertemp.culture;
+    userprefs.previous = usertemp.previous;
+    userprefs.price = usertemp.price;
+    firebase.auth().onAuthStateChanged(function(user) {
+      firebase.database().ref('Users/' + user.displayName).set(userprefs);
     });
   };
 })

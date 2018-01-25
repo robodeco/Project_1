@@ -186,11 +186,58 @@ label {
 
 }
 
-
-
 .signinpopup{
   margin-top: 20px;
 }
+
+.UNDisplay{
+  text-align: center;
+  font-family: Food, Helvetica, Arial, sans-serif;
+  font-size: 90px;
+
+}
+
+.signbutton{
+  float: left;
+  background-image: url("../images/wall.jpeg");
+  margin: 5px;
+  color: black;
+  border-color: black;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.signbutton:hover {
+  background: #FF0000;
+  -webkit-transform: scale(1.1);
+}
+
+.previousbutton{
+  float: right;
+  background-image: url("../images/wall.jpeg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 5px;
+  color: black;
+  border-color: black;
+  font-size: 18px;
+  font-weight: bold;
+
+}
+
+.previousbutton:hover{
+  background: #FF0000;
+  -webkit-transform: scale(1.1);
+}
+
+.recipeimg{
+  border-style: groove
+
+
+}
+
 
 
 
