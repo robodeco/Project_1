@@ -1,14 +1,52 @@
+//title
+var basicTimeline = anime.timeline();
+basicTimeline.add({
+targets: '#F',
+ translateY: 500,
+ duration: 350,
+ easing: 'easeOutExpo'
+})
+.add({
+  targets: '#E',
+   translateY: 500,
+   duration: 350,
+   easing: 'easeOutExpo'
+})
+.add({
+  targets: '#E2',
+   translateY: 500,
+   duration: 350,
+   easing: 'easeOutExpo'
+})
+.add({
+  targets: '#D',
+   translateY: 500,
+   duration: 350,
+   easing: 'easeOutExpo'
+})
+.add({
+  targets: '#B',
+   translateY: 500,
+   duration: 350,
+   easing: 'easeOutExpo'
+})
+.add({
+  targets: '#A',
+   translateY: 500,
+   duration: 350,
+   easing: 'easeOutExpo'
+})
+.add({
+  targets: '#G',
+   translateY: 500,
+   duration: 350,
+   easing: 'easeOutExpo'
+})
 
-//notes: eliminate signin page and add sigin function purely to modals?
-  //signout would have to be through modals and rerout to signin modal
-//notes: add bar on top left showing displayName of user signed in?
-  //not hard, add in bootstrap, can grab display name easy enough
-//notes: give previous button results actual terms used (i.e. "See your previous results for Italian and American")?
-  //doable, would depend on when we add the & to the values of the buttons
-  //how would we pull them back then? Maybe stored as different variables
-      //stored as different variable and seperated by a comma instead of &
 
-//firebase
+
+
+//firebase initialize
 var config = {
   apiKey: "AIzaSyCCePhrTpJl2GV9MRff0_-3GTUs4zYB6WQ",
   authDomain: "foodcodingstarsfeed.firebaseapp.com",
@@ -20,7 +58,7 @@ var config = {
 
 firebase.initializeApp(config);
 var database = firebase.database();
-
+//create file in database for containing the users and their preferences
 database.ref().child("Users");
 
 
@@ -33,38 +71,43 @@ var userprefs = {
   previous: ""
 }
 var cultures ="";
+prevculture = "";
+var usertemp = {
+  culture:"",
+  price:"",
+  previous:""
+}
 
-var cuisines = ["American", "Italian", "Mexican", "Chinese", "Thai", "Afghanistan", "African", "Brazilian", "Caribbean", "European", "Ethiopian", "Filipino", "Indonesian", "Japanese", "Lebanese", "Mediterranean", "Moroccan", "Peruvian", "Portuguese", "Russian", "Vietnamese", "Vegetarian"]
+var cuisines = ["American", "Italian", "Mexican", "Chinese", "Thai", "Afghan", "African", "Brazilian", "Caribbean", "European", "Ethiopian", "Filipino", "Indonesian", "Japanese", "Lebanese", "Mediterranean", "Moroccan", "Peruvian", "Portuguese", "Russian", "Vietnamese", "Vegetarian"]
 var CuisinesButtonsFinished = [];
 var finalQueryURL;
 var queryBaseURL = "https://developers.zomato.com/api/v2.1/";
 var finalQueryURL2;
 var queryBaseURL2 = "https://proxy.calweb.xyz/http://www.recipepuppy.com/api/";
 var cuisineVal2 = "";
+var lat;
+var long;
+var userprice;
+var userpricerange;
 
 //function definitions
 
-//get user location
-$("document").ready(function () {
-var lat;
-var long;
 
-getLocation();
-
+//get the location
 function getLocation() {
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
 } else {
     alert("Geolocation is not supported by this browser.");
-}
+  }
 }
 
+//store current location in variables
 function showPosition(position) {
   lat = position.coords.latitude.toString();
   long = position.coords.longitude.toString();
-  // console.log(lat);
-  // console.log(long);
 }
+
 
 //create cuisine buttons
 function renderbuttons() {
@@ -74,7 +117,7 @@ function renderbuttons() {
   CuisinesButtonsFinished = [];
   for (var i = 0; i < cuisines.length; i++) {
     var btns = $("<button>");
-    var values = cuisines[i].toLowerCase();
+    var values = cuisines[i];
     btns.addClass("btn btn-primary cuisineButton");
     btns.attr("checker", "unchecked");
     btns.attr("value", values);
@@ -99,8 +142,7 @@ function checkFunction() {
   }
 }
 
-//click handler for all cuisine buttons to run the check function
-$(document).on("click", ".cuisineButton", checkFunction);
+
 
 
 //pull previous search terms from firebase for logged in user
@@ -131,16 +173,19 @@ firebase.auth().onAuthStateChanged(function(user) {
     $("#signinorout").append(signInbutton);
   }
   firebase.database().ref('Users/' + user.displayName).on("value", function(snapshot) {
-    // console.log(snapshot.val());
-    var prevculture = snapshot.val().culture;
-    // var prevprice = snapshot.val().price;
-    // var prevtimeofday = snapshot.val().timeofday;
-    // console.log(prevculture + ",");
+
+    prevculture = snapshot.val().culture;
+    previouscultures = snapshot.val().previous;
+    previousprice = snapshot.val().price;
+    // console.log(prevculture);
+    // console.log(previouscultures);
+
     //renders a previous search button if previous terms exist for user
     if (prevculture != ""){
-      var previousbutton = $("<button>");
-      previousbutton.addClass("btn btn-primary");
-      previousbutton.text("See Your Previous Results!");
+      $("#prevresults").empty();
+      var previousbutton = $("<button id=prevbutton>");
+      previousbutton.addClass("btn btn-primary prevbutton");
+      previousbutton.text("See Your Previous Results for " + previouscultures + " for $" + previousprice);
       $("#prevresults").append(previousbutton);
 
     }
@@ -149,41 +194,31 @@ firebase.auth().onAuthStateChanged(function(user) {
 };
 
 
+
+
+function previousbuttonfunction(){
+  userprice = 0;
+  culturepick = prevculture;
+  userprice = previousprice;
+  restuarantsapi();
+  recipesapi();
+  renderbuttons();
+}
+
+
 //loop through buttons for "checked" function. If there, add value to culture(s) picked
 function GetCuisinePrefs() {
   for (var j = 0; j < CuisinesButtonsFinished.length; j++) {
     var newchecker = CuisinesButtonsFinished[j].attr("checker");
     if (newchecker === "checked") {
-      cultures += CuisinesButtonsFinished[j].val().trim() + ",";
-      culturepick += CuisinesButtonsFinished[j].val().trim() + "&";
+      cultures += CuisinesButtonsFinished[j].val().trim() + ", ";
+      culturepick += CuisinesButtonsFinished[j].val().trim().toLowerCase() + "&";
     };
   };
 };
 
-//call independent functions
-renderbuttons();
-previous();
-
-//clickhandlers
-
-$("#submit").on("click", function() {
-
-
-  event.preventDefault();
-  GetCuisinePrefs();
-  // console.log(culturepick);
-  userprefs.culture = culturepick;
-  userprefs.previous = cultures;
-
-
-  // userprefs.timeofday = $("#time-input").val();
-  // userprefs.culture = culturepickpicker();
-  // userprefs.price = $("#price-input").val();
-
-  firebase.auth().onAuthStateChanged(function(user) {
-    firebase.database().ref('Users/' + user.displayName).set(userprefs);
-  });
-
+//restaurant API call
+function restuarantsapi(){
   finalQueryURL = queryBaseURL + "search?q=" + culturepick + "lat=" + lat + "&lon=" + long + "&count=5";
   // console.log(finalQueryURL);
   $.ajax({
@@ -194,108 +229,161 @@ $("#submit").on("click", function() {
       "user-key": "b585192e1aca10c32e449a9b7c13f1cd"
     }
   })
+
   .done(function(response) {
     $("#restaurants").empty();
-
   // console.log(response.restaurants);
-
-   var results = response.restaurants;
-
-   for (var i = 0; i < results.length; i++) {
-
-
-    var restName = response.restaurants[i].restaurant.name
-    // console.log(restName);
-    var restWeb = "<a class='links' href ='" + response.restaurants[i].restaurant.url+"' target='_blank'>" + response.restaurants[i].restaurant.name +"</a>"
-    // console.log(restWeb);
-    var restLoca = response.restaurants[i].restaurant.location.address;
+   var restresults = response.restaurants;
+   console.log(restresults);
+   for (var i = 0; i < restresults.length; i++) {
+    var restcontainer = $("<div class = 'countries'>");
+    var restName = restresults[i].restaurant.name;
+    var restlink = restresults[i].restaurant.url;
+    var restWeb = "<a class='links' href ='" + restlink + "' target='_blank'>" + restName +"</a>"
+    var restLoca = restresults[i].restaurant.location.address;
     // var image ="<img src='" + response.restaurants[i].restaurant.photos_url + "''></img>"
-    var cost = response.restaurants[i].restaurant.average_cost_for_two;
+    var cost = restresults[i].restaurant.average_cost_for_two;
+    var priceRange = restresults[i].restaurant.price_range;
 
-    $("#restaurants").append("<div class='countries'><p>" + restWeb + "</p><p>");
+    priceranges();
+    console.log("Userprice range" + userpricerange);
+    function pricechecker(){
+      if (userpricerange < restresults[i].restaurant.price_range){
+        return false;
+      }
+    }
+    pricechecker();
+    restcontainer.prepend(restWeb);
+    restcontainer.append("<p>")
+    restcontainer.append(restLoca);
+    restcontainer.append(cost);
+    if (pricechecker() !=false){
+    $("#restaurants").append(restcontainer);
+    }
+    }
+    if (restresults == []){
+      $("#restaurants").append("<h1> Oh No! Looks like there are no viable restaurants near you! Try again or pick a recipe! <h1>")
     }
   });
+}
 
 
-    finalQueryURL2= queryBaseURL2 + "?q=" + culturepick +"&count=5";
-    console.log(finalQueryURL2);
-    $.ajax({
-      url: finalQueryURL2,
-      method:"GET",
-    })
+
+//recipe API call
+function recipesapi(){
+  finalQueryURL2= queryBaseURL2 + "?q=" + culturepick +"&count=10";
+  // console.log(finalQueryURL2);
+  $.ajax({
+    url: finalQueryURL2,
+    method:"GET",
+  })
 
 
-    .done(function(response) {
-      $("#recipes").empty();
+  .done(function(response) {
+    $("#recipes").empty();
 
-      var recipes = JSON.parse(response)
-      console.log(recipes);
+    var recipes = JSON.parse(response)
+    // console.log(recipes);
 
-      var recipeArr = recipes.results;
-      console.log(recipeArr);
+    var recipeArr = recipes.results;
+    // console.log(recipeArr);
 
-      for (var i = 0; i < recipeArr.length; i++) {
+    for (var i = 0; i < recipeArr.length; i++) {
 
 
-          var recipecontainer= $("<div class='reciperesponse'>")
-          var recipetitle = recipeArr[i].title;
-          var recipelink = "<a class = 'links' href= '" + recipeArr[i].href +"'target='_blank'>" + recipeArr[i].title +"</a>"
-          var recipethumb = recipeArr[i].thumbnail;
-          console.log(recipetitle, recipelink, recipethumb);
-          recipecontainer.append(recipetitle);
-          recipecontainer.append(recipelink);
-          recipecontainer.prepend(recipethumb);
-          $("#recipes").append("<div class='reciperesponse'><p>" + recipelink + "</p><p>");
-        }
+        var recipecontainer= $("<div class='reciperesponse'>")
+        var recipetitle = recipeArr[i].title;
+        var recipelink = "<a class = 'links' href= '" + recipeArr[i].href +"'target='_blank'>" + recipeArr[i].title +"</a>"
+        var recipethumb = recipeArr[i].thumbnail;
+        // console.log(recipetitle, recipelink, recipethumb);
+        recipecontainer.append(recipetitle);
+        recipecontainer.append(recipelink);
+        recipecontainer.prepend(recipethumb);
+        $("#recipes").append("<div class='reciperesponse'><p>" + recipelink + "</p><p>");
+      }
 
-  });
+});
+}
 
+function validate(){
+
+   userprice = $("#inlineFormInputGroup").val().trim();
+    if ((isNaN(userprice)) || (userprice =="")){
+      $("#submit").attr("data-target", "#invalid");
+
+      return false;
+
+    }  else {
+      $("#submit").attr("data-target", "#success");
+      return true;
+    }
+  }
+
+function priceranges (){
+    if (userprice <=25){
+      userpricerange = 1;
+
+    } else if (userprice <= 50){
+      userpricerange = 2;
+
+    } else if (userprice <=75){
+      userpricerange = 3;
+
+    } else if (userprice >= 76){
+      userpricerange = 4;
+    }
+
+}
+
+
+//call independent functions
+getLocation();
+renderbuttons();
+previous();
+
+
+//clickhandlers
+//click handler for all cuisine buttons to run the check function
+$(document).on("click", ".cuisineButton", checkFunction);
+
+//click handler for using the previous search terms entered
+$(document).on("click", ".prevbutton", previousbuttonfunction);
+
+
+
+
+//submit button for new search
+$("#submit").on("click", function() {
+
+  event.preventDefault();
+  if (validate() == true){
+  userprefs.culture = usertemp.culture;
+  userprefs.previous = usertemp.previous;
+  userprefs.price = usertemp.price;
+  firebase.auth().onAuthStateChanged(function(user) {
+    firebase.database().ref('Users/' + user.displayName).set(userprefs);
+    });
+  GetCuisinePrefs();
+  usertemp.culture = culturepick;
+  usertemp.previous = cultures;
+  usertemp.price = userprice;
+  restuarantsapi();
+  recipesapi();
   renderbuttons();
+  console.log(usertemp);
+  }
 })
 
 
+//should the user click refresh without doing another search, the temp userobject is pushed to firebase to become the "previous search"
+$(window).on("unload", function (){
+  if (userprefs.culture != ""){
+  userprefs.culture = usertemp.culture;
+  userprefs.previous = usertemp.previous;
+  firebase.auth().onAuthStateChanged(function(user) {
+    firebase.database().ref('Users/' + user.displayName).set(userprefs);
+    });
+  };
+})
 
-});
-
-
-
-
-
-
-// (document).ready(function() {
-
-//
-// $(".cuisineButton").on("click",function() {
-// cuisineVal2 +=$(this).val();
-//
-//
-// finalQueryURL2= queryBaseURL2 + "?q=" + culturepick;
-// console.log(finalQueryURL2);
-// $.ajax({
-//   url: finalQueryURL2,
-//   method:"GET",
-//
-// })
-// .done(function(response) {
-//
-//   // console.log(response);
-//   var resultsz = JSON.parse(response)
-//   console.log(resultsz);
-//
-//
-//
-//
-// })
-//     $("#submit").on("click", function() {
-//
-//
-//       $.ajax({
-//         url: finalQueryURL2,
-//         method:"GET",
-//
-//       })
-//       .done(function(response) {
-//
-//         // console.log(response);
-//         var resultsz = JSON.parse(response)
-//         console.log(resultsz);
+// });

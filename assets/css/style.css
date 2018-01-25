@@ -20,6 +20,7 @@ body {
   text-align: center;
   border-radius: 25px;
   border-color: black;
+  height: 300px;
 }
 
 .title {
@@ -92,6 +93,7 @@ h1 {
   font-size: 82px;
   font-family: Writing, Helvetica, Arial, sans-serif;
   border-top: 2.5px solid black;
+
 }
 
 .restaurants {
@@ -116,12 +118,26 @@ label {
   color: yellow;
 }
 
+.money{
+  font-family: Writing, Helvetica, Arial, sans-serif;
+  font-size: 50px;
+  color: yellow;
+  margin-right: 10px;
+  height: 40px;
+}
+
+.priceform{
+  height: 40px;
+  margin-top: 18px;
+}
+
 .countries {
   background-image: url("../images/white.jpeg");
   color: black;
   margin-bottom: 20px;
   border-bottom: 1.5px solid black;
   border-radius: 50px;
+  padding: 12px;
 
 }
 
@@ -155,6 +171,45 @@ label {
   margin-bottom: 20px;
   border-bottom: 1.5px solid black;
   border-radius: 50px;
+
+}
+
+.modal-content{
+  background-image: url("../images/top.jpeg");
+  font-family: Writing, Helvetica, Arial, sans-serif;
+  font-size: 50px;
+  color: black;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+}
+
+
+.feedbag {
+  margin-top: -500px
+}
+
+.letter{
+  height: 150px;
+}
+
+@media only screen and (max-width: 980px){
+  .letter{
+    height: 75px;
+  }
+}
+
+@media only screen and (max-width: 768px){
+  .letter{
+    height: 45px;
+  }
+}
+
+@media only screen and (max-width: 640px){
+  .letter{
+    height: 25px;
+  }
 }
 
 @font-face {
