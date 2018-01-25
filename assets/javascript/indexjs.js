@@ -336,7 +336,7 @@ function restuarantsapi() {
 //recipe API call
 function recipesapi() {
   finalQueryURL2= queryBaseURL2 + "?q=" + culturepick +"&count=5"+"&oi=1";
-      console.log(finalQueryURL2);
+
       $.ajax({
         url: finalQueryURL2,
         method:"GET",
@@ -344,24 +344,23 @@ function recipesapi() {
       .done(function(response) {
         $("#recipes").empty();
         var recipes = JSON.parse(response)
-        // console.log(recipes);
+
         var recipeArr = recipes.results;
-        // console.log(recipeArr);
+
         for (var i = 0; i < recipeArr.length; i++) {
             var recipecontainer= $("<div class='reciperesponse'>")
             var recipetitle = recipeArr[i].title;
             var recipelink = "<a class = 'links' href= '" + recipeArr[i].href +"'target='_blank'>" + recipeArr[i].title +"</a>"
             var recipethumb = recipeArr[i].thumbnail;
-            console.log("recipe thumbnail: ",recipethumb);
-            // console.log(recipetitle, recipelink, recipethumb);
+
+
             recipecontainer.append(recipetitle);
             recipecontainer.append(recipelink);
             recipecontainer.prepend(recipethumb);
             recipethumb = "<img class=recipeimg src="+String(recipeArr[i].thumbnail) + '>';
              var recipeingredient= recipeArr[i].ingredients;
-             // recipeArr[i].thumbnail;
-             // "<img src = thumbnail=''"+
-             console.log(recipetitle, recipelink, recipethumb, recipeingredient);
+
+
              recipecontainer.append(recipetitle);
              recipecontainer.append(recipelink);
              recipecontainer.append(recipeingredient);
@@ -464,7 +463,7 @@ $("#submit").on("click", function() {
     restuarantsapi();
     recipesapi();
     renderbuttons();
-    console.log(usertemp);
+    
 
   }
 })
