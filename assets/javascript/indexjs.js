@@ -2,44 +2,44 @@
 var basicTimeline = anime.timeline();
 basicTimeline.add({
 targets: '#F',
- translateY: 500,
- duration: 350,
+ scale:1.5,
+ duration: 300,
  easing: 'easeOutExpo'
 })
 .add({
   targets: '#E',
-   translateY: 500,
-   duration: 350,
+  scale:1.5,
+  duration: 300,
    easing: 'easeOutExpo'
 })
 .add({
   targets: '#E2',
-   translateY: 500,
-   duration: 350,
+  scale:1.5,
+  duration: 300,
    easing: 'easeOutExpo'
 })
 .add({
   targets: '#D',
-   translateY: 500,
-   duration: 350,
+  scale:1.5,
+  duration: 300,
    easing: 'easeOutExpo'
 })
 .add({
   targets: '#B',
-   translateY: 500,
-   duration: 350,
+  scale:1.5,
+  duration: 300,
    easing: 'easeOutExpo'
 })
 .add({
   targets: '#A',
-   translateY: 500,
-   duration: 350,
+  scale:1.5,
+  duration: 300,
    easing: 'easeOutExpo'
 })
 .add({
   targets: '#G',
-   translateY: 500,
-   duration: 350,
+  scale:1.5,
+  duration: 300,
    easing: 'easeOutExpo'
 })
 

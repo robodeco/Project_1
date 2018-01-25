@@ -20,97 +20,94 @@
 
   <div class="total">
 
-    <div class="jumbotron">
-
-      <div class="container">
-        <div class="feedbag">
-        <img class="letter" id="F" src="assets/images/F.svg">
-        <img class="letter" id="E" src="assets/images/E.svg">
-        <img class="letter" id="E2" src="assets/images/E2.svg">
-        <img class="letter" id="D" src="assets/images/D.svg">
-        <img class="letter" id="B" src="assets/images/B.svg">
-        <img class="letter" id="A" src="assets/images/A.svg">
-        <img class="letter" id="G" src="assets/images/G.svg">
-      </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- signout button -->
-
-    <h3 id="usernamedisplay" class="UNDisplay"></h3>
-    <div id="signinorout"></div>
-
-    <div id="prevresults"></div>
-    <!-- Questionnaire !-->
-
-
     <div class="card">
+    <div class="card-body">
+      <div class="feedbag">
+        <img class="letter image-fluid" id="F" src="assets/images/F.svg">
+        <img class="letter image-fluid" id="E" src="assets/images/E.svg">
+        <img class="letter image-fluid" id="E2" src="assets/images/E2.svg">
+        <img class="letter image-fluid" id="D" src="assets/images/D.svg">
+        <img class="letter image-fluid" id="B" src="assets/images/B.svg">
+        <img class="letter image-fluid" id="A" src="assets/images/A.svg">
+        <img class="letter image-fluid" id="G" src="assets/images/G.svg">
+        <p class="lead">Discover Your Cravings!</p>
+      </div>
+    </div>
+  </div>
 
-      <div class="card-body">
+  <!-- signout button -->
 
-        <div class="form-group">
+  <h3 id="usernamedisplay" class="UNDisplay"></h3>
+  <div id="signinorout"></div>
 
-          <label for="exampleSelect1" id="culture-input">What are you in the mood for?</label>
-
-
-          <div id="BtnDisplay"></div>
-
-          <form>
-            <label for="exampleSelect1">How much are you willing to spend?</label>
-
-            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-              <div class="input-group-addon money">$</div>
-              <input type="number" class="form-control priceform" id="inlineFormInputGroup" placeholder="ex 10">
-            </div>
+  <div id="prevresults"></div>
+  <!-- Questionnaire !-->
 
 
-        </div>
+  <div class="card">
 
-        <button type="button" class="button" data-toggle="modal" data-target="#success" id="submit" type="submit">Get Your Feedbag</button>
-        </form>
-        <div class="modal fade" id="invalid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content modal-invalid">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <div class="card-body">
+
+      <div class="form-group">
+
+        <label for="exampleSelect1" id="culture-input">What are you in the mood for?</label>
+
+
+        <div id="BtnDisplay"></div>
+
+        <form>
+          <label for="exampleSelect1">How much are you willing to spend?</label>
+
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon money">$</div>
+            <input type="number" class="form-control priceform" id="inlineFormInputGroup" placeholder="ex 10">
+          </div>
+
+
+      </div>
+
+      <button type="button" class="button" data-toggle="modal" data-target="#success" id="submit" type="submit">Get Your Feedbag</button>
+      </form>
+      <div class="modal fade" id="invalid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content modal-invalid">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
-              </div>
-              <div class="modal-body">
-                Please provide a dollar amount!
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            <div class="modal-body">
+              Please provide a dollar amount!
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-              </div>
             </div>
           </div>
         </div>
-        <!-- <button class="button " id="submit ">Get Your FeedBag</button> -->
+      </div>
+      <!-- <button class="button " id="submit ">Get Your FeedBag</button> -->
 
+    </div>
+  </div>
+
+  <div class="results col-12 ">
+    <div class="card half-card ">
+      <div class="restaurants ">
+        Restaurants
+      </div>
+      <div class="card-body response " id="restaurants">
       </div>
     </div>
 
-    <div class="results col-12 ">
-      <div class="card half-card ">
-        <div class="restaurants ">
-          Restaurants
-        </div>
-        <div class="card-body response " id="restaurants">
-        </div>
+    <div class="card half-card ">
+      <div class="recipes ">
+        Recipes
       </div>
-
-      <div class="card half-card ">
-        <div class="recipes ">
-          Recipes
-        </div>
-        <div class="card-body response " id="recipes">
-        </div>
+      <div class="card-body response " id="recipes">
       </div>
     </div>
+  </div>
 
   </div>
 
