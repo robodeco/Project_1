@@ -233,10 +233,13 @@ label {
 }
 
 .recipeimg{
-  border-style: groove
-
+  border-style: groove;
+  height: 50%;
+  width: 50%;
+  border-radius: 12px;
 
 }
+
 
 
 

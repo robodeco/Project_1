@@ -83,12 +83,13 @@ var CuisinesButtonsFinished = [];
 var finalQueryURL;
 var queryBaseURL = "https://developers.zomato.com/api/v2.1/";
 var finalQueryURL2;
-var queryBaseURL2 = "https://proxy.calweb.xyz/http://www.recipepuppy.com/api/";
 var cuisineVal2 = "";
 var lat;
 var long;
 var userprice;
 var userpricerange;
+var queryBaseURL2 = "http://food2fork.com/api/search?key=";
+var f2fkey= "2ae002a5e80f4bbc77f1c9a0da4876dc";
 
 //function definitions
 
@@ -335,39 +336,53 @@ function restuarantsapi() {
 
 //recipe API call
 function recipesapi() {
-  finalQueryURL2= queryBaseURL2 + "?q=" + culturepick +"&count=5"+"&oi=1";
+  console.log(culturepick);
+  finalQueryURL2 = queryBaseURL2 + f2fkey + "&q=" + culturepick;
 
-      $.ajax({
-        url: finalQueryURL2,
-        method:"GET",
-      })
-      .done(function(response) {
-        $("#recipes").empty();
-        var recipes = JSON.parse(response)
+  console.log(finalQueryURL2);
+  $.ajax({
+      url: finalQueryURL2,
+      method: "GET"
+    })
+    .done(function(response) {
 
-        var recipeArr = recipes.results;
+      $("#recipes").empty();
+      var result = JSON.parse(response)
+      console.log(result)
+      var recipeArr = result.recipes;
 
-        for (var i = 0; i < recipeArr.length; i++) {
-            var recipecontainer= $("<div class='reciperesponse'>")
-            var recipetitle = recipeArr[i].title;
-            var recipelink = "<a class = 'links' href= '" + recipeArr[i].href +"'target='_blank'>" + recipeArr[i].title +"</a>"
-            var recipethumb = recipeArr[i].thumbnail;
+      for (var i = 0; i < recipeArr.length; i++) {
+        var recipecontainer = $("<div class='reciperesponse'>")
+
+        var reciperes = {
+          title: recipeArr[i].title,
+          link: recipeArr[i].source_url,
+          thumb: "<img class=recipeimg src=" + String(recipeArr[i].image_url) + '>',
+          ingredients: recipeArr[i].ingredients,
+          // favorite: "<img class= 'favicon' src = '../imgs/fvicon.png' height = '30px' width = '30px' fav= 'no' rest='no' >",
+
+        }
+
+        recipecontainer.attr("href", reciperes.link);
+        recipecontainer.attr("title", reciperes.title);
+        recipecontainer.attr("ingredients", reciperes.ingredients);
+        recipecontainer.attr("thumbnail", String(recipeArr[i].image_url));
 
 
-            recipecontainer.append(recipetitle);
-            recipecontainer.append(recipelink);
-            recipecontainer.prepend(recipethumb);
-            recipethumb = "<img class=recipeimg src="+String(recipeArr[i].thumbnail) + '>';
-             var recipeingredient= recipeArr[i].ingredients;
 
 
-             recipecontainer.append(recipetitle);
-             recipecontainer.append(recipelink);
-             recipecontainer.append(recipeingredient);
-             recipecontainer.prepend(recipethumb);
-             $("#recipes").append("<div class='reciperesponse'><p>"+ recipethumb + "</p><p>"+ recipelink + "</p><p>"+"Ingredients:"+ recipeingredient + "</p><p>");
-          }
-      })
+        recipecontainer.append("<p></p>");
+        // recipecontainer.append(reciperes.favorite);
+        recipecontainer.append("<a class = 'links' href= '" + reciperes.link + "'target='_blank'>" + reciperes.title + "</a>");
+        recipecontainer.append("<p></p>")
+        recipecontainer.append(reciperes.ingredients);
+        recipecontainer.prepend(reciperes.thumb);
+        // recres.push(recipecontainer);
+
+        $("#recipes").append(recipecontainer);
+
+      }
+    })
 }
 
 //validation of user input
@@ -463,7 +478,7 @@ $("#submit").on("click", function() {
     restuarantsapi();
     recipesapi();
     renderbuttons();
-    
+
 
   }
 })
